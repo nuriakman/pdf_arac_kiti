@@ -1,2 +1,3 @@
-# pdf_arac_kiti
-PDF Araç Kiti
+# PDF Araç Kiti
+
+PDF Dosyaların üzerinde işlem yapmayı hedefleyen bir uygulamanın ekran tasarımı çalışması.
