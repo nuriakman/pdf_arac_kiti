@@ -78,9 +78,9 @@ https://poppler.freedesktop.org/
         <!-- <p><a href='index.php'>Ana Sayfaya Git</a></p> -->
 
 <br><br>
-        <h2>PDF Dosyaları birleştirip tek dosya yap</h2>
+        <h2>PDF Dosyaları Birleştir</h2>
         <fieldset style='width:50%'>
-            <legend><b style='color: darkred;'>PDF Birleştirme Ayarları:</b> </legend>
+            <legend><b style='color: darkred;'>PDF Dosyaları Birleştirme Ayarları:</b> </legend>
             <table border="1" cellpadding="10" cellspacing="0" width="100%">
                 <tr>
                     <td nowrap="nowrap"> Eklenen her dosya sağ sayfadan başlasın </td>
@@ -97,7 +97,7 @@ https://poppler.freedesktop.org/
         <br>
         <br>
         <fieldset style='width:50%'>
-            <legend><b style='color: darkred;'>Çoklu PDF Dosya Seçimi:</b> <input type="button" value="HAYDI" onclick="HAYDI()"></legend>
+            <legend><b style='color: darkred;'>Çoklu PDF Dosya Seçimi:</b> </legend>
             <table border="1" cellpadding="10" cellspacing="0" width="100%">
                 <tr>
                     <td nowrap="nowrap"> Dosyaları Seçiniz (Çoklu Seçim Yapabilirsiniz) </td>
@@ -203,7 +203,7 @@ https://poppler.freedesktop.org/
     }
 </script>
         <fieldset style='width:50%'>
-            <legend><b style='color: darkred;'>Tek Tek PDF Dosya Seçimi:</b> <input type='button' value='1 Tane Daha Ekle' onclick='YeniDosyaEkle(1)'></legend>
+            <legend><b style='color: darkred;'>Tek Tek PDF Dosya Seçimi:</b> <input type='button' value='1 PDF Daha Ekle' onclick='YeniDosyaEkle(1)'></legend>
             <table border="1" cellpadding="10" cellspacing="0" width="100%" id="tableBirlestirme1">
                 <tr>
                     <td nowrap="nowrap"> Dosya No </td>
@@ -239,7 +239,7 @@ https://poppler.freedesktop.org/
         </fieldset>
         <br>
         <br>
-        <h2>Bir PDF dosyası üzerinde çalış</h2>
+        <h2>PDF Dosyayı Böl</h2>
         <fieldset style='width:50%'>
             <legend><b style='color: darkred;'>PDF Dosyanız:</b></legend>
             <table border="1" cellpadding="10" cellspacing="0" width="100%">
@@ -253,10 +253,10 @@ https://poppler.freedesktop.org/
         <br>
         <br>
         <fieldset style='width:50%'>
-            <legend><b style='color: darkred;'>PDF Çıktı Üretme:</b></legend>
+            <legend><b style='color: darkred;'>PDF Dosyayı Bölme Seçenekleri:</b></legend>
             <table border="1" cellpadding="10" cellspacing="0" width="100%">
                 <tr>
-                    <td nowrap="nowrap"> Her biri X sayfalık kitapçık (booklet) yap </td>
+                    <td nowrap="nowrap"> Her biri X yapraktan oluşan kitapçık (booklet) yap </td>
                     <td nowrap="nowrap">
                         <input type="text" name="BookletSayfaAdedi" placeholder="Örnek: 60" style="width: 250px;"> </td>
                 </tr>
@@ -266,60 +266,45 @@ https://poppler.freedesktop.org/
                         <input type="checkbox" name="TumunuPDFYap"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Her X sayfayı alıp, sayfaları ayrı PDF yap </td>
+                    <td nowrap="nowrap"> Her X sayfayı alıp, ayrı PDF'ler yap </td>
                     <td nowrap="nowrap">
                         <input type="text" name="HerXSayfadanBol" placeholder="Örnek: 4" style="width: 250px;"> </td>
                 </tr>
-            </table>
-        </fieldset>
-        <br>
-        <br>
-        <fieldset style='width:50%'>
-            <legend><b style='color: darkred;'>Boş Sayfa Ekle:</b></legend>
-            <table border="1" cellpadding="10" cellspacing="0" width="100%">
                 <tr>
-                    <td nowrap="nowrap"> Hangi sayfalardan sonra boş sayfa eklensin? </td>
-                    <td nowrap="nowrap">
-                        <input type="text" name="BosSayfalar" placeholder="Örnek: 6,18,27,33" style="width: 250px;"> </td>
-                </tr>
-            </table>
-        </fieldset>
-        <br>
-        <br>
-        <fieldset style='width:50%'>
-            <legend><b style='color: darkred;'>Sayfa Sil:</b></legend>
-            <table border="1" cellpadding="10" cellspacing="0" width="100%">
-                <tr>
-                    <td nowrap="nowrap"> Hangi sayfalar silinsin? </td>
-                    <td nowrap="nowrap">
-                        <input type="text" name="SilSayfalar" placeholder="Örnek: 6,18,27,33-40" style="width: 250px;"> </td>
-                </tr>
-            </table>
-        </fieldset>
-        <br>
-        <br>
-        <fieldset style='width:50%'>
-            <legend><b style='color: darkred;'>PDF Dosyayı Böl:</b></legend>
-            <table border="1" cellpadding="10" cellspacing="0" width="100%">
-                <tr>
-                    <td nowrap="nowrap"> Hangi sayfalardan bölünsün? </td>
+                    <td nowrap="nowrap"> Şu sayfalardan bölerek ayrı PDF'ler yap </td>
                     <td nowrap="nowrap">
                         <input type="text" name="Bol1Sayfalar" placeholder="Örnek: 6,18,27,33" style="width: 250px;"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Özel böl (Her noktalıvirgül ayrımı ayrı PDF olacak) </td>
+                    <td nowrap="nowrap"> Özel böl (Her ';' ayrımı ayrı bir PDF olacak) </td>
                     <td nowrap="nowrap">
                         <input type="text" name="Bol2Sayfalar" placeholder="Örnek: 1,7,10,50-60;18-30,35-40" style="width: 250px;"> </td>
                 </tr>
             </table>
         </fieldset>
+
+        <br>
+        <br>
+        <h2>PDF Dosya Üzerinde Çalış</h2>
+
+        <fieldset style='width:50%'>
+            <legend><b style='color: darkred;'>Ana PDF Dosyanız:</b></legend>
+            <table border="1" cellpadding="10" cellspacing="0" width="100%">
+                <tr>
+                    <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
+                    <td nowrap="nowrap">
+                        <input type='file' name='AnaDosya' multiple> </td>
+                </tr>
+            </table>
+        </fieldset>
+
         <br>
         <br>
         <fieldset style='width:50%'>
-            <legend><b style='color: darkred;'>PDF Dosya Ekle:</b>  <input type='button' value='1 Tane Daha Ekle' onclick='YeniDosyaEkle(2)'></legend>
+            <legend><b style='color: darkred;'>Ana PDF Dosyanızın Sonuna PDF Dosya Ekleyin:</b>  <input type='button' value='1 PDF Daha Ekle' onclick='YeniDosyaEkle(2)'></legend>
             <table border="1" cellpadding="10" cellspacing="0" width="100%" id="tableBirlestirme2">
                 <tr>
-                    <td nowrap="nowrap"> Dosya </td>
+                    <td nowrap="nowrap"> Dosya</td>
                     <td nowrap="nowrap"> Hangi sayfadan sonra eklensin? </td>
                     <td nowrap="nowrap"> Eklenecek PDF dosyayı seçiniz: </td>
                     <td nowrap="nowrap"> Bu dosyanın hangi sayfaları eklensin? </td>
@@ -331,7 +316,7 @@ https://poppler.freedesktop.org/
                         YENİ
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Baslama[0]' placeholder='Örnek: 18' style='width: 250px;'>
+                        <input type='text' name='YeniPDF_Baslama[0]' placeholder='Örnek: 18 (Sonuna eklemek için boş bırakın)' style='width: 300px;'>
                     </td>
                     <td nowrap='nowrap'>
                         <input type='file' name='YeniPDF[0]'>
@@ -346,7 +331,7 @@ https://poppler.freedesktop.org/
                         1
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Baslama[0]' placeholder='Örnek: 18' style='width: 250px;'>
+                        <input type='text' name='YeniPDF_Baslama[0]' placeholder='Örnek: 18 (Sonuna eklemek için boş bırakın)' style='width: 300px;'>
                     </td>
                     <td nowrap='nowrap'>
                         <input type='file' name='YeniPDF[0]'>
@@ -565,7 +550,32 @@ https://poppler.freedesktop.org/
 
         </script>
 
-<h1>Yön Değiştirme ve Sıralama</h3>
+        <br>
+        <br>
+<h1>Yön Değiştirme, Sıralama, Sayfa Ekleme ve Sayfa Silme</h3>
+        <fieldset style='width:50%'>
+            <legend><b style='color: darkred;'>Boş Sayfa Ekle:</b></legend>
+            <table border="1" cellpadding="10" cellspacing="0" width="100%">
+                <tr>
+                    <td nowrap="nowrap"> Hangi sayfalardan sonra boş sayfa eklensin? </td>
+                    <td nowrap="nowrap">
+                        <input type="text" name="BosSayfalar" placeholder="Örnek: 6,18,27,33" style="width: 250px;"> </td>
+                </tr>
+            </table>
+        </fieldset>
+        <br>
+        <br>
+        <fieldset style='width:50%'>
+            <legend><b style='color: darkred;'>Sayfa Sil:</b></legend>
+            <table border="1" cellpadding="10" cellspacing="0" width="100%">
+                <tr>
+                    <td nowrap="nowrap"> Hangi sayfalar silinsin? </td>
+                    <td nowrap="nowrap">
+                        <input type="text" name="SilSayfalar" placeholder="Örnek: 6,18,27,33-40" style="width: 250px;"> </td>
+                </tr>
+            </table>
+        </fieldset>
+
 <p>Sürükle bırakarak yaparak sayfaların yerlerini değiştirebilirsiniz.<br>Yeşil oklara tıklayarak sayfa yönünü değiştirebilirsiniz.</p>
         <ul class="PDFSayfalari">
             
@@ -746,6 +756,10 @@ https://poppler.freedesktop.org/
             <input type="hidden" name="toplamsayfa" value="116">
             <input type="submit" name="gonder" value="Gönder">
         </p>
+
+
+<input type="button" value="Ajax File Upload" onclick="HAYDI()">
+
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
