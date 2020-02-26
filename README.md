@@ -6,6 +6,8 @@ PDF Dosyaların üzerinde işlem yapmayı hedefleyen bir uygulamanın ekran tasa
 - Her biri X yapraktan oluşan kitapçık (booklet) yap
 - Sayfa No Ekleme: Baş.Sayfa: X, Bit.Sayfa: Y,  Sayfa numarası şundan başlasın: Z  `pspdftool 'number(x=-1pt,y=-1pt,start=1,size=10)' input.pdf output.pdf` Kaynak: https://stackoverflow.com/a/9034911/134739
 
+### Başarılı Sonuçlar
+resimli.pdf adlı PDF dosya içindeki TÜM RESİMLERİ 5-100 arası dosyalardaki resimleri, resim hangi sayfada var onu da dosya adına ekleyerek .PDG formatında çıkartır `pdfimages -f 5 -l 100 -p -png resimli.pdf SONUC`
 
 ### Faydalı Programlar
 
