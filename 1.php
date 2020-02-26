@@ -9,7 +9,7 @@
 
 ?>
 
-
+    
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -155,6 +155,55 @@
                     <td nowrap="nowrap"> Özel böl (Her ';' ayrımı ayrı bir PDF olacak) </td>
                     <td nowrap="nowrap">
                         <input type="text" name="Bol2Sayfalar" placeholder="Örnek: 1,7,10,50-60;18-30,35-40" style="width: 250px;"> </td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+
+
+    <!-- ========================================================== -->
+    <!-- ========================================================== -->
+    <!-- =========================== RESİM ======================== -->
+    <!-- ========================================================== -->
+    <!-- ========================================================== -->
+    <form id="formResim" name="formResim" method="post" action="" enctype="multipart/form-data">
+        
+        <h2>PDF ve Resim</h2>
+        
+        <fieldset>
+            <legend><b style='color: darkred;'>PDF'den Resim Üretme:</b></legend>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
+                    <td nowrap="nowrap">
+                        <input accept='application/pdf' type='file' name='AnaDosya' multiple> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> PDF içindeki tüm resimleri çıkar </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="TumunuPDFYap1"> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> PDF'in her sayfasını resim dosyası olarak çıkar </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="TumunuPDFYap2"> </td>
+                </tr>
+            </table>
+        </fieldset>
+
+
+        <fieldset>
+            <legend><b style='color: darkred;'>Resim'den PDF üretme: (Sadece jpg ve png)</b></legend>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td nowrap="nowrap"> Şu resimlerin her birini ayrı ayrı PDF dosya yap </td>
+                    <td nowrap="nowrap">
+                        <input accept='image/jpeg,image/png' type='file' name='AnaDosya1' multiple> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> Şu resimleri tek bir PDF dosya yap </td>
+                    <td nowrap="nowrap">
+                        <input accept='image/jpeg,image/png' type='file' name='AnaDosya2' multiple> </td>
                 </tr>
             </table>
         </fieldset>
@@ -558,8 +607,9 @@
         margin-bottom: 30px;        
     }
 
-    #formBirlestir  {border-left: 15px solid #FF3D00; padding-left: 20px; }
-    #formBol        {border-left: 15px solid #FFC400; padding-left: 20px; }
+    #formBirlestir  {border-left: 15px solid #FF5722; padding-left: 20px; }
+    #formBol        {border-left: 15px solid #FF9800; padding-left: 20px; }
+    #formResim      {border-left: 15px solid #FFEB3B; padding-left: 20px; }
     #formHarmanla   {border-left: 15px solid #00E676; padding-left: 20px; }
     #formArayaEkle  {border-left: 15px solid #00B0FF; padding-left: 20px; }
     #formYonet      {border-left: 15px solid #651FFF; padding-left: 20px; }
