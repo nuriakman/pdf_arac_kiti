@@ -4,10 +4,18 @@ PDF Dosyaların üzerinde işlem yapmayı hedefleyen bir uygulamanın ekran tasa
 
 ### Eklenebilecek Özellikler:
 - Her biri X yapraktan oluşan kitapçık (booklet) yap
-- Sayfa No Ekleme: Baş.Sayfa: X, Bit.Sayfa: Y,  Sayfa numarası şundan başlasın: Z
-- Resimlerden PDF üretme `convert "*.{png,jpeg}" -quality 100 outfile.pdf`
-- Resimlerden PDF üretme ÖNCE: `ls *.tif | xargs -I% convert % %.pdf` SONRA `pdftk *.pdf cat output merged.pdf && rm *.tif.pdf`
-- PDF'den Resim Üretme: `convert -density 600 in.pdf out-%02d.jpg`
+- Sayfa No Ekleme: Baş.Sayfa: X, Bit.Sayfa: Y,  Sayfa numarası şundan başlasın: Z  `pspdftool 'number(x=-1pt,y=-1pt,start=1,size=10)' input.pdf output.pdf` Kaynak: https://stackoverflow.com/a/9034911/134739
+
+
+# Faydalı Programlar
+
+- https://pdfkit.org/
+- [pdftk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
+- https://github.com/mstamy2/PyPDF2 A utility to read and write PDFs with Python
+- https://github.com/pmaupin/pdfrw  pdfrw is a pure Python library that reads and writes PDFs
+
+
+# ARAŞTIMALAR
 
 
 ### pdftk Kullanım Örnekleri
@@ -24,6 +32,9 @@ PDF Dosyaların üzerinde işlem yapmayı hedefleyen bir uygulamanın ekran tasa
 - convert -geometry 1600x1600 -density 200x200 -quality 100 test.pdf test_image.jpg
 - convert -thumbnail x300 demo.pdf[2] -flatten demo.jpg
 - -flatten Parametresi, transperant zemine sahip sayfaların düzgün çalışmasını sağlar
+- Resimlerden PDF üretme `convert "*.{png,jpeg}" -quality 100 outfile.pdf`
+- Resimlerden PDF üretme ÖNCE: `ls *.tif | xargs -I% convert % %.pdf` SONRA `pdftk *.pdf cat output merged.pdf && rm *.tif.pdf`
+- PDF'den Resim Üretme: `convert -density 600 in.pdf out-%02d.jpg`
 
 ```BASH
 # normally I extract the embedded image with 'pdfimages' at the native resolution, 
@@ -76,9 +87,6 @@ mkdir images && pdftoppm -jpeg -jpegopt quality=100 -r 300 mypdf.pdf images/pg
 - pdfimages -all input.pdf images/prefix
 
 
-
-# ARAŞTIMALAR
-
 ### Booklet Yapma:
 - http://www.michaelm.info/blog/?p=1375
 - http://pdfbooklet.sourceforge.net/
@@ -86,7 +94,14 @@ mkdir images && pdftoppm -jpeg -jpegopt quality=100 -r 300 mypdf.pdf images/pg
 
 ### HowTo Add Page Numbers to a PDF File:
 - http://forums.debian.net/viewtopic.php?t=30598
+- https://stackoverflow.com/questions/30378713/modify-existing-pdf-to-add-page-n-of-nnn-footer
 
+The next command uses `pdftk` with `multistamp` to overlay the page numbering file to an original:
+```
+pdftk original.pdf              \
+  multistamp 100pagenumbers.pdf \
+  output pages-numbered.pdf
+```
 
 ### Print two A5 pages on one A4 page with correct sizes:
 ### How can I print a PDF document on multiple pages?:
