@@ -7,7 +7,7 @@ PDF Dosyaların üzerinde işlem yapmayı hedefleyen bir uygulamanın ekran tasa
 - Sayfa No Ekleme: Baş.Sayfa: X, Bit.Sayfa: Y,  Sayfa numarası şundan başlasın: Z  `pspdftool 'number(x=-1pt,y=-1pt,start=1,size=10)' input.pdf output.pdf` Kaynak: https://stackoverflow.com/a/9034911/134739
 
 
-# Faydalı Programlar
+### Faydalı Programlar
 
 - https://pdfkit.org/
 - [pdftk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
@@ -15,7 +15,7 @@ PDF Dosyaların üzerinde işlem yapmayı hedefleyen bir uygulamanın ekran tasa
 - https://github.com/pmaupin/pdfrw  pdfrw is a pure Python library that reads and writes PDFs
 
 
-# ARAŞTIMALAR
+# ARAŞTIRMALAR
 
 
 ### pdftk Kullanım Örnekleri
