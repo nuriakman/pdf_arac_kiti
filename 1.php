@@ -593,6 +593,7 @@
         margin: 0px;
         padding: 0px;
         margin-right:  10%;
+        font-family: sans-serif;
     }
 
     form {
@@ -721,6 +722,85 @@
         display: block;
         text-align: left;
     }
+
+
+/* TYPE file */
+/* TYPE file */
+/* TYPE file */
+input[type=file] {
+  min-width: 100px;
+  font-family: inherit;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #FFE0B2;
+  color: #000;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+input[type=file]:hover {
+  background: #1d49aa;
+}
+
+input[type=file]:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+/* TYPE button */
+/* TYPE button */
+/* TYPE button */
+input[type=button] {
+  min-width: 100px;
+  font-family: inherit;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #4676d7;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+input[type=button]:hover {
+  background: #1d49aa;
+}
+
+input[type=button]:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+/* TYPE text */
+/* TYPE text */
+/* TYPE text */
+input[type=text] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=text]:focus {
+    border-color:#333;
+}
+
+input[type=submit] {
+  min-width: 100px;
+  font-family: inherit;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #F44336;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 
 </style>
 
