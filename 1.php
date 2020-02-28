@@ -133,7 +133,7 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya1[]'> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosyaBol[]'> </td>
                 </tr>
             </table>
         </fieldset>
@@ -184,7 +184,7 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya1[]'> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosyaResim1[]'> </td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap"> PDF içindeki tüm resimleri çıkar </td>
@@ -214,7 +214,7 @@
                 <tr>
                     <td nowrap="nowrap"> Resim Dosyalarını Seçiniz (Çoklu Seçim)</td>
                     <td nowrap="nowrap">
-                        <input accept='image/jpeg,image/png' type='file' name='AnaDosya1[]' multiple> </td>
+                        <input accept='image/jpeg,image/png' type='file' name='AnaDosyaResim2[]' multiple> </td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap"> Resimlerin her birini PDF dosya yap </td>
@@ -319,7 +319,7 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya1[]' multiple> </td>
+                        <input accept='application/pdf' type='file' name='ArayaEkleANA[]' multiple> </td>
                 </tr>
             </table>
         </fieldset>
@@ -342,7 +342,7 @@
                         <input type='text' name='YeniPDF_Baslama[]' style='width: 300px;' placeholder='Örnek: 18 (Sonuna eklemek için boş bırakın)'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[]'>
+                        <input accept='application/pdf' type='file' name='ArayaEklePDF[]'>
                     </td>
                     <td nowrap='nowrap'>
                         <input type='text' name='YeniPDF_Sayfalar[]' style='width: 250px;' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)'>
@@ -357,7 +357,7 @@
                         <input type='text' name='YeniPDF_Baslama[]' style='width: 300px;' placeholder='Örnek: 18 (Sonuna eklemek için boş bırakın)'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[]'>
+                        <input accept='application/pdf' type='file' name='ArayaEklePDF[]'>
                     </td>
                     <td nowrap='nowrap'>
                         <input type='text' name='YeniPDF_Sayfalar[]' style='width: 250px;' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)'>
@@ -386,7 +386,7 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya1[]'> </td>
+                        <input accept='application/pdf' type='file' name='YonetAnaPDF[]'> </td>
                     <td nowrap="nowrap"> 
                         <input type="button" value="Başla !" onclick="FormuPostala('formYonet1')" id="FormuGonder"> </td>
                 </tr>
@@ -848,6 +848,11 @@ input[type=submit] {
     }
 
 
+    #FormuGonder:hover {
+        background-color: #C51162;
+    }
+
+
 </style>
 
 
@@ -973,6 +978,11 @@ input[type=submit] {
 
     function FormuPostala(FormAdi) {
 
+        if( DosyaSecilmemis(FormAdi) ) {
+            alert("Dosya seçimi yapılmamış!")
+            return;
+        }
+
         // AJAX ile FİLE UPLOAD
 
         var form = $('#' + FormAdi)[0]; // Burada standart javascript objesi kullanılması gerekiyor
@@ -1002,5 +1012,52 @@ input[type=submit] {
         } );
 
     } // FormuPostala
+
+
+
+    // Dosya Yükleme bölümünde seçim yapılıp yapılmadığı kontrolü
+    // Dosya Yükleme bölümünde seçim yapılıp yapılmadığı kontrolü
+    var DosyalarTekli    = 0;
+    var DosyalarCoklu    = 0;
+    var AnaDosyaBol      = 0;
+    var AnaDosyaResim1   = 0;
+    var AnaDosyaResim2   = 0;
+    var HarmanPDF        = 0;
+    var ArayaEkleANA     = 0;
+    var ArayaEklePDF     = 0;
+    var YonetAnaPDF      = 0;
+
+    jQuery(document).ready(function($) {
+        
+        $(document).on('change', 'input:file', function() {
+            if( this.name == "DosyalarTekli[]"  ) DosyalarTekli    = 1;
+            if( this.name == "DosyalarCoklu[]"  ) DosyalarCoklu    = 1;
+            if( this.name == "AnaDosyaBol[]"    ) AnaDosyaBol      = 1;
+            if( this.name == "AnaDosyaResim1[]" ) AnaDosyaResim1   = 1;
+            if( this.name == "AnaDosyaResim2[]" ) AnaDosyaResim2   = 1;
+            if( this.name == "HarmanPDF[]"      ) HarmanPDF        = 1;
+            if( this.name == "ArayaEkleANA[]"   ) ArayaEkleANA     = 1;
+            if( this.name == "ArayaEklePDF[]"   ) ArayaEklePDF     = 1;
+            if( this.name == "YonetAnaPDF[]"    ) YonetAnaPDF      = 1;
+            console.log(this.name)
+        });
+
+    });
+
+
+    function DosyaSecilmemis(FormAdi){
+
+        if( FormAdi == "formBirlestir" ) return ( DosyalarTekli  == 0 && DosyalarCoklu == 0 );
+        if( FormAdi == "formBol"       ) return ( AnaDosyaBol    == 0 );
+        if( FormAdi == "formResim1"    ) return ( AnaDosyaResim1 == 0 );
+        if( FormAdi == "formResim2"    ) return ( AnaDosyaResim2 == 0 );
+        if( FormAdi == "formHarmanla"  ) return ( HarmanPDF      == 0 );
+        if( FormAdi == "formArayaEkle" ) return ( ArayaEkleANA   == 0 || ArayaEklePDF  == 0 );
+        if( FormAdi == "formYonet1"    ) return ( YonetAnaPDF    == 0 );
+
+        return true;
+    } // DosyaSecilmemis
+
+
 
 </script>
