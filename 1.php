@@ -1,15 +1,3 @@
-<?php
-
-    if( isset($_POST["toplamsayfa"]) ) {
-        echo "<pre>";
-        print_r($_POST);
-        print_r($_FILES);
-        echo "</pre>";
-    }
-
-?>
-
-    
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -89,7 +77,7 @@
             <legend><b style='color: darkred;'>Çoklu PDF Dosya Seçimi:</b> </legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
-                    <td nowrap="nowrap"> Birleştirilecek Dosyaları Seçiniz (Çoklu Seçim Yapabilirsiniz) </td>
+                    <td nowrap="nowrap"> Birleştirilecek Dosyaları Seçiniz (Çoklu Seçim) </td>
                     <td nowrap="nowrap">
                         <input accept='application/pdf' type='file' name='DosyalarCoklu[]' id='DosyalarCoklu' multiple onchange='DosyalariEkranaListele()'> </td>
                 </tr>
@@ -145,7 +133,7 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya[]'> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosya1[]'> </td>
                 </tr>
             </table>
         </fieldset>
@@ -196,17 +184,17 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya' multiple> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosya1[]'> </td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap"> PDF içindeki tüm resimleri çıkar </td>
                     <td nowrap="nowrap">
-                        <input type="checkbox" name="TumunuPDFYap1"> </td>
+                        <input type="checkbox" name="AyarResimPDFYap1"> </td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap"> PDF'in her sayfasını resim dosyası olarak çıkar </td>
                     <td nowrap="nowrap">
-                        <input type="checkbox" name="TumunuPDFYap2"> </td>
+                        <input type="checkbox" name="AyarResimPDFYap2"> </td>
                 </tr>
             </table>
         </fieldset>
@@ -224,14 +212,19 @@
             <legend><b style='color: darkred;'>Resim'den PDF üret: (Sadece jpg ve png)</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
-                    <td nowrap="nowrap"> Şu resimlerin her birini ayrı ayrı PDF dosya yap </td>
+                    <td nowrap="nowrap"> Resim Dosyalarını Seçiniz (Çoklu Seçim)</td>
                     <td nowrap="nowrap">
-                        <input accept='image/jpeg,image/png' type='file' name='AnaDosya1' multiple> </td>
+                        <input accept='image/jpeg,image/png' type='file' name='AnaDosya1[]' multiple> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Şu resimlerin tamamından tek bir PDF dosya yap </td>
+                    <td nowrap="nowrap"> Resimlerin her birini PDF dosya yap </td>
                     <td nowrap="nowrap">
-                        <input accept='image/jpeg,image/png' type='file' name='AnaDosya2' multiple> </td>
+                        <input type="checkbox" name="AyarResim1"> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> Resimlerden PDF dosya yap </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="AyarResim2"> </td>
                 </tr>
             </table>
         </fieldset>
@@ -264,13 +257,13 @@
                         YENİ
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[0]'>
+                        <input accept='application/pdf' type='file' name='HarmanPDF[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Sayfalar[0]' value='' placeholder='Örnek: 4' style='width: 250px;'>
+                        <input type='text' name='Harman_AlinacakSayfalar[]' value='' placeholder='Örnek: 4' style='width: 250px;'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Baslama[0]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
+                        <input type='text' name='Harman_BaslamaSayfasi[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
                     </td>
                 </tr>
 
@@ -279,13 +272,13 @@
                         1
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[0]'>
+                        <input accept='application/pdf' type='file' name='HarmanPDF[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Sayfalar[0]' value='' placeholder='Örnek: 4' style='width: 250px;'>
+                        <input type='text' name='Harman_AlinacakSayfalar[]' value='' placeholder='Örnek: 4' style='width: 250px;'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Baslama[0]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
+                        <input type='text' name='Harman_BaslamaSayfasi[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
                     </td>
                 </tr>
 
@@ -294,13 +287,13 @@
                         2
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[0]'>
+                        <input accept='application/pdf' type='file' name='HarmanPDF[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Sayfalar[0]' value='' placeholder='Örnek: 4' style='width: 250px;'>
+                        <input type='text' name='Harman_AlinacakSayfalar[]' value='' placeholder='Örnek: 4' style='width: 250px;'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Baslama[0]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
+                        <input type='text' name='Harman_BaslamaSayfasi[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
                     </td>
                 </tr>
 
@@ -326,7 +319,7 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya' multiple> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosya1[]' multiple> </td>
                 </tr>
             </table>
         </fieldset>
@@ -346,13 +339,13 @@
                         YENİ
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Baslama[0]' placeholder='Örnek: 18 (Sonuna eklemek için boş bırakın)' style='width: 300px;'>
+                        <input type='text' name='YeniPDF_Baslama[]' style='width: 300px;' placeholder='Örnek: 18 (Sonuna eklemek için boş bırakın)'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[0]'>
+                        <input accept='application/pdf' type='file' name='YeniPDF[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Sayfalar[0]' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)' style='width: 250px;'>
+                        <input type='text' name='YeniPDF_Sayfalar[]' style='width: 250px;' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)'>
                     </td>
                 </tr>
 
@@ -361,13 +354,13 @@
                         1
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Baslama[0]' placeholder='Örnek: 18 (Sonuna eklemek için boş bırakın)' style='width: 300px;'>
+                        <input type='text' name='YeniPDF_Baslama[]' style='width: 300px;' placeholder='Örnek: 18 (Sonuna eklemek için boş bırakın)'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[0]'>
+                        <input accept='application/pdf' type='file' name='YeniPDF[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Sayfalar[0]' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)' style='width: 250px;'>
+                        <input type='text' name='YeniPDF_Sayfalar[]' style='width: 250px;' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)'>
                     </td>
                 </tr>
 
@@ -382,8 +375,8 @@
     <!-- ========================== YONET ========================= -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formYonet" name="formYonet" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="FormAdi" value="formYonet">
+    <form id="formYonet1" name="formYonet1" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="FormAdi" value="formYonet1">
 
         <h2>Sayfaları Düzenle</h2>
 
@@ -393,13 +386,18 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya' multiple> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosya1[]'> </td>
                     <td nowrap="nowrap"> 
-                        <input type="button" value="Başla !" onclick="FormuPostala('formYonet')" id="FormuGonder"> </td>
+                        <input type="button" value="Başla !" onclick="FormuPostala('formYonet1')" id="FormuGonder"> </td>
                 </tr>
             </table>
         </fieldset>
-        
+    </form>
+
+
+    <form id="formYonet2" name="formYonet2" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="FormAdi" value="formYonet2">
+
         <h2>Sayfa Yönü Değiştir / Sırala</h2>
 
         <p>Sürükle bırakarak yaparak sayfaların yerlerini değiştirebilirsiniz.<br>Yeşil oklara tıklayarak sayfa yönünü değiştirebilirsiniz.</p>
@@ -594,13 +592,13 @@
                 </tr>
                 <tr>
                     <td nowrap="nowrap">
-                        <input type="text" name="SilSayfalar" placeholder="Örnek: 6,18,27,33-40" style="width: 250px;"> </td>
+                        <input type="text" name="SilinecekSayfalar" placeholder="Örnek: 6,18,27,33-40" style="width: 250px;"> </td>
                     <td nowrap="nowrap">
-                        <input type="text" name="BosSayfalar" placeholder="Örnek: 6,18,27,33" style="width: 250px;"> </td>
+                        <input type="text" name="EklenecekSayfalar" placeholder="Örnek: 6,18,27,33" style="width: 250px;"> </td>
                 </tr>
             </table>
         </fieldset>
-        <input type="button" value="Değişiklikleri Kaydet" onclick="FormuPostala('formHarmanla')" id="FormuGonder">
+        <input type="button" value="Değişiklikleri Kaydet" onclick="FormuPostala('formYonet2')" id="FormuGonder">
     </form>
 
     <p style="margin-bottom: 0px;">
@@ -646,7 +644,8 @@
     #formResim2     {border-left: 15px solid #C6FF00; padding-left: 20px; }
     #formHarmanla   {border-left: 15px solid #00E676; padding-left: 20px; }
     #formArayaEkle  {border-left: 15px solid #00B0FF; padding-left: 20px; }
-    #formYonet      {border-left: 15px solid #651FFF; padding-left: 20px; }
+    #formYonet1     {border-left: 15px solid #651FFF; padding-left: 20px; }
+    #formYonet2     {border-left: 15px solid #AA00FF; padding-left: 20px; }
 
     /* Taşınan Nesne */
     .drop-elmDrag {
