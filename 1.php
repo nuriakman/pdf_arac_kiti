@@ -30,48 +30,10 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formBirlestir" name="formBirlestir" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="form_adi" value="formBirlestir">
         
         <h2>PDF Dosyaları Birleştir</h2>
         
-        <fieldset>
-            <legend><b style='color: darkred;'>PDF Dosyaları Birleştirme Ayarları:</b> </legend>
-            <table border="1" cellpadding="10" cellspacing="0">
-                <tr>
-                    <td nowrap="nowrap"> Eklenen her dosya sağ sayfadan başlasın </td>
-                    <td nowrap="nowrap">
-                        <input type="checkbox" name="AyarBirlestir1"> </td>
-                </tr>
-                <tr>
-                    <td nowrap="nowrap"> Dosyalar arasına boş bir yaprak ekle </td>
-                    <td nowrap="nowrap">
-                        <input type="checkbox" name="AyarBirlestir2"> </td>
-                </tr>
-            </table>
-        </fieldset>
-
-
-        <fieldset>
-            <legend><b style='color: darkred;'>Çoklu PDF Dosya Seçimi:</b> </legend>
-            <table border="1" cellpadding="10" cellspacing="0">
-                <tr>
-                    <td nowrap="nowrap"> Dosyaları Seçiniz (Çoklu Seçim Yapabilirsiniz) </td>
-                    <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='TopluPDF[]' id='TopluPDF' multiple onchange='DosyalariEkranaListele()'> </td>
-                </tr>
-                <tr id='SiralamaSatiri' style='display:none;'>
-                    <td colspan="2">
-                        <b>Dosyalarınızın sıralamasını sürükle-bırak yaparak değiştirebilirsiniz:</b><br>
-                        <input type='hidden' id='Siralama' name='Siralama' value=''>
-                        <ul id='tmpSecilenDosyalar' class='tmpSecilenDosyalar'>
-                            
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-            <p><b>NOT:</b> Dosyalarınızın tamamı tek bir klasör içindeyse bu bölümü kullanarak bir defada ve kolayca ekleyebilirsiniz</p>
-        </fieldset>
-
-
         <fieldset>
             <legend><b style='color: darkred;'>Tek Tek PDF Dosya Seçimi:</b> <input type='button' value='1 PDF Daha Ekle' onclick='YeniDosyaEkle(1)'></legend>
             <table border="1" cellpadding="10" cellspacing="0" id="tableBirlestirme1">
@@ -106,8 +68,50 @@
                 </tr>
 
             </table>
-            <p><b>NOT:</b> Dosyalarınız farklı farkl klasörler içindeyse bu bölümü kullanarak teker teker ekleyebilirsiniz</p>
+            <p><b>NOT:</b> Dosyalarınız farklı farklı klasörler içindeyse bu bölümü kullanarak teker teker ekleyebilirsiniz</p>
         </fieldset>
+
+
+        <fieldset>
+            <legend><b style='color: darkred;'>Çoklu PDF Dosya Seçimi:</b> </legend>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td nowrap="nowrap"> Dosyaları Seçiniz (Çoklu Seçim Yapabilirsiniz) </td>
+                    <td nowrap="nowrap">
+                        <input accept='application/pdf' type='file' name='TopluPDF[]' id='TopluPDF' multiple onchange='DosyalariEkranaListele()'> </td>
+                </tr>
+                <tr id='SiralamaSatiri' style='display:none;'>
+                    <td colspan="2">
+                        <b>Dosyalarınızın sıralamasını sürükle-bırak yaparak değiştirebilirsiniz:</b><br>
+                        <input type='hidden' id='Siralama' name='Siralama' value=''>
+                        <ul id='tmpSecilenDosyalar' class='tmpSecilenDosyalar'>
+                            
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <p><b>NOT:</b> Dosyalarınızın tamamı tek bir klasör içindeyse bu bölümü kullanarak bir defada ve kolayca ekleyebilirsiniz</p>
+        </fieldset>
+
+        <fieldset>
+            <legend><b style='color: darkred;'>PDF Dosyaları Birleştirme Ayarları:</b> </legend>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td nowrap="nowrap"> Eklenen her dosya sağ sayfadan başlasın </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="AyarBirlestir1"> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> Dosyalar arasına boş bir yaprak ekle </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="AyarBirlestir2"> </td>
+                </tr>
+            </table>
+        </fieldset>
+
+
+        
+        <input type="button" value="Birleştir" onclick="FormuPostala('formBirlestir')" id="FormuGonder">
     </form>
 
 
@@ -118,6 +122,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formBol" name="formBol" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="form_adi" value="formBol">
         
         <h2>PDF Dosyayı Böl</h2>
         
@@ -158,6 +163,7 @@
                 </tr>
             </table>
         </fieldset>
+        <input type="button" value="Böl" onclick="FormuPostala('formBol')" id="FormuGonder">
     </form>
 
 
@@ -166,12 +172,13 @@
     <!-- =========================== RESİM ======================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formResim" name="formResim" method="post" action="" enctype="multipart/form-data">
+    <form id="formResim1" name="formResim1" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="form_adi" value="formResim1">
         
-        <h2>PDF ve Resim</h2>
+        <h2>PDF'den Resim'e</h2>
         
         <fieldset>
-            <legend><b style='color: darkred;'>PDF'den Resim Üretme:</b></legend>
+            <legend><b style='color: darkred;'>PDF'den Resim Üret:</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
@@ -190,10 +197,18 @@
                 </tr>
             </table>
         </fieldset>
+        <input type="button" value="Başla !" onclick="FormuPostala('formResim1')" id="FormuGonder">
+    </form>
 
+
+
+    <form id="formResim2" name="formResim2" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="form_adi" value="formResim2">
+
+        <h2>Resim'den PDF'e</h2>
 
         <fieldset>
-            <legend><b style='color: darkred;'>Resim'den PDF üretme: (Sadece jpg ve png)</b></legend>
+            <legend><b style='color: darkred;'>Resim'den PDF üret: (Sadece jpg ve png)</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
                     <td nowrap="nowrap"> Şu resimlerin her birini ayrı ayrı PDF dosya yap </td>
@@ -201,13 +216,15 @@
                         <input accept='image/jpeg,image/png' type='file' name='AnaDosya1' multiple> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Şu resimleri tek bir PDF dosya yap </td>
+                    <td nowrap="nowrap"> Şu resimlerin tamamından tek bir PDF dosya yap </td>
                     <td nowrap="nowrap">
                         <input accept='image/jpeg,image/png' type='file' name='AnaDosya2' multiple> </td>
                 </tr>
             </table>
         </fieldset>
+        <input type="button" value="Başla !" onclick="FormuPostala('formResim2')" id="FormuGonder">
     </form>
+
 
     <!-- ========================================================== -->
     <!-- ========================================================== -->
@@ -215,6 +232,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formHarmanla" name="formHarmanla" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="form_adi" value="formHarmanla">
 
         <h2>PDF Dosyaları Harmanla</h2>
 
@@ -275,6 +293,7 @@
 
             </table>
         </fieldset>
+        <input type="button" value="Harmanla" onclick="FormuPostala('formHarmanla')" id="FormuGonder">
     </form>
 
 
@@ -284,6 +303,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formArayaEkle" name="formArayaEkle" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="form_adi" value="formArayaEkle">
 
         <h2>PDF Dosyanın Arasına PDF Ekle</h2>
 
@@ -340,13 +360,7 @@
 
             </table>
         </fieldset>
-
-        <p>
-            <input type="button" value="GÖSTER" onclick="GOSTER()">
-
-            <input type="submit" name="gonder" value="Gönder">
-        </p>
-    
+        <input type="button" value="Araya Ekle" onclick="FormuPostala('formArayaEkle')" id="FormuGonder">
     </form>
 
 
@@ -356,8 +370,9 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formYonet" name="formYonet" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="form_adi" value="formYonet">
 
-        <h2>Sayfaları Düzenleme</h2>
+        <h2>Sayfaları Düzenle</h2>
 
         <fieldset>
             <legend><b style='color: darkred;'>PDF Dosyanız:</b></legend>
@@ -367,15 +382,198 @@
                     <td nowrap="nowrap">
                         <input accept='application/pdf' type='file' name='AnaDosya' multiple> </td>
                     <td nowrap="nowrap"> 
-                        <input type='button' value='Düzenlemeyi Başlat!'> </td>
+                        <input type="button" value="Başla !" onclick="FormuPostala('formYonet')" id="FormuGonder"> </td>
                 </tr>
             </table>
         </fieldset>
         
-        <h2>Boş Sayfa Ekleme ve Sayfa Silme</h2>
+        <h2>Sayfa Yönü Değiştir / Sırala</h2>
+
+        <p>Sürükle bırakarak yaparak sayfaların yerlerini değiştirebilirsiniz.<br>Yeşil oklara tıklayarak sayfa yönünü değiştirebilirsiniz.</p>
+
+        <fieldset>
+            <legend><b style='color: darkred;'>SAYFALARI DÜZENLE</b></legend>
+
+            <ul class="PDFSayfalari">
+                
+                <li>
+                    <img id='0' src='pul/sayfa-0000.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='0'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL0' name='sol[0]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG0' name='sag[0]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK0' name='dik[0]'>
+                    <div class='LabelYON' onclick="Cevir1(0, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(0, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(0, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: TEST</span>
+                </li>
+                
+                <li>
+                    <img id='1' src='pul/sayfa-0001.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='1'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL1' name='sol[1]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG1' name='sag[1]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK1' name='dik[1]'>
+                    <div class='LabelYON' onclick="Cevir1(1, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(1, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(1, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 1</span>
+                </li>
+                
+                <li>
+                    <img id='2' src='pul/sayfa-0002.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='2'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL2' name='sol[2]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG2' name='sag[2]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK2' name='dik[2]'>
+                    <div class='LabelYON' onclick="Cevir1(2, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(2, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(2, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 2</span>
+                </li>
+                
+                <li>
+                    <img id='3' src='pul/sayfa-0003.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='3'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL3' name='sol[3]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG3' name='sag[3]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK3' name='dik[3]'>
+                    <div class='LabelYON' onclick="Cevir1(3, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(3, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(3, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 3</span>
+                </li>
+                
+                <li>
+                    <img id='4' src='pul/sayfa-0004.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='4'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL4' name='sol[4]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG4' name='sag[4]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK4' name='dik[4]'>
+                    <div class='LabelYON' onclick="Cevir1(4, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(4, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(4, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 4</span>
+                </li>
+                
+                <li>
+                    <img id='5' src='pul/sayfa-0005.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='5'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL5' name='sol[5]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG5' name='sag[5]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK5' name='dik[5]'>
+                    <div class='LabelYON' onclick="Cevir1(5, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(5, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(5, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 5</span>
+                </li>
+                
+                <li>
+                    <img id='6' src='pul/sayfa-0006.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='6'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL6' name='sol[6]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG6' name='sag[6]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK6' name='dik[6]'>
+                    <div class='LabelYON' onclick="Cevir1(6, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(6, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(6, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 6</span>
+                </li>
+                
+                <li>
+                    <img id='7' src='pul/sayfa-0007.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='7'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL7' name='sol[7]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG7' name='sag[7]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK7' name='dik[7]'>
+                    <div class='LabelYON' onclick="Cevir1(7, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(7, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(7, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 7</span>
+                </li>
+                
+                <li>
+                    <img id='8' src='pul/sayfa-0008.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='8'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL8' name='sol[8]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG8' name='sag[8]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK8' name='dik[8]'>
+                    <div class='LabelYON' onclick="Cevir1(8, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(8, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(8, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 8</span>
+                </li>
+                
+                <li>
+                    <img id='9' src='pul/sayfa-0009.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='9'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL9' name='sol[9]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG9' name='sag[9]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK9' name='dik[9]'>
+                    <div class='LabelYON' onclick="Cevir1(9, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(9, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(9, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 9</span>
+                </li>
+                
+                <li>
+                    <img id='10' src='pul/sayfa-0010.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='10'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL10' name='sol[10]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG10' name='sag[10]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK10' name='dik[10]'>
+                    <div class='LabelYON' onclick="Cevir1(10, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(10, 'SAG', this.value)"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(10, 'DIK', this.value)"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 10</span>
+                </li>
+                
+                <li>
+                    <img id='11' src='pul/sayfa-0011.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='11'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL11' name='sol[11]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG11' name='sag[11]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK11' name='dik[11]'>
+                    <div class='LabelYON' onclick="Cevir1(11, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(11, 'SAG')"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(11, 'DIK')"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 11</span>
+                </li>
+                
+                <li>
+                    <img id='12' src='pul/sayfa-0012.jpg'>
+                    <input type='hidden' name='sayfa_no[]' value='12'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL12' name='sol[12]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG12' name='sag[12]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK12' name='dik[12]'>
+                    <div class='LabelYON' onclick="Cevir1(12, 'SOL')"> &#8630; </div>
+                    <div class='LabelYON' onclick="Cevir1(12, 'SAG')"> &#8631; </div>
+                    <div class='LabelYON' onclick="Cevir1(12, 'DIK')"> &#8645; </div>
+                    <span class='SayfaNo'>Sayfa: 12</span>
+                </li>
+                
+            </ul> <!-- /PDFSayfalari -->
+
+            <br style='clear: both; '>
+        </fieldset>
+
+        <h2>Sayfa Sil / Boş Sayfa Ekle</h2>
         
         <fieldset>
-            <legend><b style='color: darkred;'>Boş Sayfa Ekle / Sayfa Sil</b></legend>
+            <legend><b style='color: darkred;'>Sayfa Sil / Boş Sayfa Ekle</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
                     <td nowrap="nowrap"> Hangi sayfalar silinsin? </td>
@@ -389,202 +587,22 @@
                 </tr>
             </table>
         </fieldset>
-
-        <h2>Sayfa Yönü Değiştirme ve Sıralama</h2>
-
-        <p>Sürükle bırakarak yaparak sayfaların yerlerini değiştirebilirsiniz.<br>Yeşil oklara tıklayarak sayfa yönünü değiştirebilirsiniz.</p>
-
-        <ul class="PDFSayfalari">
-            
-            <li>
-                <img id='0' src='pul/sayfa-0000.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='0'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL0' name='sol[0]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG0' name='sag[0]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK0' name='dik[0]'>
-                <div class='LabelYON' onclick="Cevir1(0, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(0, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(0, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: TEST</span>
-            </li>
-            
-            <li>
-                <img id='1' src='pul/sayfa-0001.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='1'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL1' name='sol[1]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG1' name='sag[1]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK1' name='dik[1]'>
-                <div class='LabelYON' onclick="Cevir1(1, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(1, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(1, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 1</span>
-            </li>
-            
-            <li>
-                <img id='2' src='pul/sayfa-0002.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='2'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL2' name='sol[2]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG2' name='sag[2]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK2' name='dik[2]'>
-                <div class='LabelYON' onclick="Cevir1(2, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(2, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(2, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 2</span>
-            </li>
-            
-            <li>
-                <img id='3' src='pul/sayfa-0003.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='3'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL3' name='sol[3]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG3' name='sag[3]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK3' name='dik[3]'>
-                <div class='LabelYON' onclick="Cevir1(3, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(3, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(3, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 3</span>
-            </li>
-            
-            <li>
-                <img id='4' src='pul/sayfa-0004.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='4'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL4' name='sol[4]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG4' name='sag[4]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK4' name='dik[4]'>
-                <div class='LabelYON' onclick="Cevir1(4, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(4, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(4, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 4</span>
-            </li>
-            
-            <li>
-                <img id='5' src='pul/sayfa-0005.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='5'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL5' name='sol[5]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG5' name='sag[5]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK5' name='dik[5]'>
-                <div class='LabelYON' onclick="Cevir1(5, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(5, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(5, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 5</span>
-            </li>
-            
-            <li>
-                <img id='6' src='pul/sayfa-0006.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='6'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL6' name='sol[6]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG6' name='sag[6]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK6' name='dik[6]'>
-                <div class='LabelYON' onclick="Cevir1(6, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(6, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(6, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 6</span>
-            </li>
-            
-            <li>
-                <img id='7' src='pul/sayfa-0007.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='7'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL7' name='sol[7]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG7' name='sag[7]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK7' name='dik[7]'>
-                <div class='LabelYON' onclick="Cevir1(7, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(7, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(7, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 7</span>
-            </li>
-            
-            <li>
-                <img id='8' src='pul/sayfa-0008.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='8'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL8' name='sol[8]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG8' name='sag[8]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK8' name='dik[8]'>
-                <div class='LabelYON' onclick="Cevir1(8, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(8, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(8, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 8</span>
-            </li>
-            
-            <li>
-                <img id='9' src='pul/sayfa-0009.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='9'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL9' name='sol[9]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG9' name='sag[9]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK9' name='dik[9]'>
-                <div class='LabelYON' onclick="Cevir1(9, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(9, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(9, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 9</span>
-            </li>
-            
-            <li>
-                <img id='10' src='pul/sayfa-0010.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='10'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL10' name='sol[10]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG10' name='sag[10]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK10' name='dik[10]'>
-                <div class='LabelYON' onclick="Cevir1(10, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(10, 'SAG', this.value)"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(10, 'DIK', this.value)"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 10</span>
-            </li>
-            
-            <li>
-                <img id='11' src='pul/sayfa-0011.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='11'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL11' name='sol[11]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG11' name='sag[11]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK11' name='dik[11]'>
-                <div class='LabelYON' onclick="Cevir1(11, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(11, 'SAG')"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(11, 'DIK')"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 11</span>
-            </li>
-            
-            <li>
-                <img id='12' src='pul/sayfa-0012.jpg'>
-                <input type='hidden' name='sayfa_no[]' value='12'>
-                <br>
-                <input type='checkbox' class='chkBoxGizli' id='SOL12' name='sol[12]'>
-                <input type='checkbox' class='chkBoxGizli' id='SAG12' name='sag[12]'>
-                <input type='checkbox' class='chkBoxGizli' id='DIK12' name='dik[12]'>
-                <div class='LabelYON' onclick="Cevir1(12, 'SOL')"> &#8630; </div>
-                <div class='LabelYON' onclick="Cevir1(12, 'SAG')"> &#8631; </div>
-                <div class='LabelYON' onclick="Cevir1(12, 'DIK')"> &#8645; </div>
-                <span class='SayfaNo'>Sayfa: 12</span>
-            </li>
-            
-        </ul> <!-- /PDFSayfalari -->
-
-        <br style='clear: both; '>
-        <p>
-            <input type="hidden" name="toplamsayfa" value="116">
-            <input type="submit" name="gonder" value="Gönder">
-        </p>
-
+        <input type="button" value="Değişiklikleri Kaydet" onclick="FormuPostala('formHarmanla')" id="FormuGonder">
     </form>
 
-    <input type="button" value="Ajax File Upload" onclick="HAYDI()">
-
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
+    <p style="margin-bottom: 0px;">
+        <input type="hidden" name="toplamsayfa" value="116">
+        <input type="submit" name="gonder" value="SUBMIT">
+        <input type="button" value="Ajax File Upload" onclick="HAYDI()">
+    </p>
 
 </body>
 
 </html>
+
+
+
+
 
 
 <style>
@@ -594,6 +612,7 @@
         padding: 0px;
         margin-right:  10%;
         font-family: sans-serif;
+        margin-bottom: 700px;
     }
 
     form {
@@ -610,7 +629,8 @@
 
     #formBirlestir  {border-left: 15px solid #FF5722; padding-left: 20px; }
     #formBol        {border-left: 15px solid #FF9800; padding-left: 20px; }
-    #formResim      {border-left: 15px solid #FFEB3B; padding-left: 20px; }
+    #formResim1     {border-left: 15px solid #FFEA00; padding-left: 20px; }
+    #formResim2     {border-left: 15px solid #C6FF00; padding-left: 20px; }
     #formHarmanla   {border-left: 15px solid #00E676; padding-left: 20px; }
     #formArayaEkle  {border-left: 15px solid #00B0FF; padding-left: 20px; }
     #formYonet      {border-left: 15px solid #651FFF; padding-left: 20px; }
@@ -801,6 +821,20 @@ input[type=submit] {
   cursor: pointer;
 }
 
+    #FormuGonder    {
+        min-width: 100px;
+        font-family: inherit;
+        appearance: none;
+        border: 0;
+        border-radius: 5px;
+        color: #fff;
+        padding: 8px 16px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        background-color: #E91E63;
+        width: 300px;
+    }
+
 
 </style>
 
@@ -903,22 +937,6 @@ input[type=submit] {
            }
         } );
     }
-
-
-    function GOSTER() {
-
-        $.ajax({
-               type    : "POST",
-               url     : "1test.php",
-               dataType: "text",
-               data    : $("#form1").serialize(), // Formu serialize et.
-               success : function(ajaxCevap)
-               {
-                   alert(ajaxCevap); // Cevabı göster...
-               }
-             });
-    }
-
 
 
     function Cevir(ResimNo, ResimYon) {
