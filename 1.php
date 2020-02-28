@@ -30,7 +30,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formBirlestir" name="formBirlestir" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="form_adi" value="formBirlestir">
+        <input type="hidden" name="FormAdi" value="formBirlestir">
         
         <h2>PDF Dosyaları Birleştir</h2>
         
@@ -39,8 +39,8 @@
             <table border="1" cellpadding="10" cellspacing="0" id="tableBirlestirme1">
                 <tr>
                     <td nowrap="nowrap"> Dosya No </td>
-                    <td nowrap="nowrap"> Eklenecek PDF dosyayı seçiniz </td>
-                    <td nowrap="nowrap"> Bu dosyanın hangi sayfaları eklensin? </td>
+                    <td nowrap="nowrap"> Birleştirilecek PDF dosyayı seçiniz </td>
+                    <td nowrap="nowrap"> Bu dosyanın hangi sayfaları alınsın? </td>
                 </tr>
                 
                 <tr style='display:none;'>
@@ -48,10 +48,10 @@
                         YENİ
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[0]'>
+                        <input accept='application/pdf' type='file' name='DosyalarTekli[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Sayfalar[0]' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)' style='width: 250px;'>
+                        <input type='text' name='AlinacakSayfalar[]' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)' style='width: 250px;'>
                     </td>
                 </tr>
 
@@ -60,10 +60,23 @@
                         1
                     </td>
                     <td nowrap='nowrap'>
-                        <input accept='application/pdf' type='file' name='YeniPDF[0]'>
+                        <input accept='application/pdf' type='file' name='DosyalarTekli[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='YeniPDF_Sayfalar[0]' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)' style='width: 250px;'>
+                        <input type='text' name='AlinacakSayfalar[]' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)' style='width: 250px;'>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td nowrap='nowrap' style='font-size: 30px; text-align: center;'>
+                        2
+                    </td>
+                    <td nowrap='nowrap'>
+                        <input accept='application/pdf' type='file' name='DosyalarTekli[]'>
+                    </td>
+                    <td nowrap='nowrap'>
+                        <input type='text' name='AlinacakSayfalar[]' placeholder='1,3,5,15-27  (Tamamı için boş bırakın)' style='width: 250px;'>
                     </td>
                 </tr>
 
@@ -76,14 +89,14 @@
             <legend><b style='color: darkred;'>Çoklu PDF Dosya Seçimi:</b> </legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
-                    <td nowrap="nowrap"> Dosyaları Seçiniz (Çoklu Seçim Yapabilirsiniz) </td>
+                    <td nowrap="nowrap"> Birleştirilecek Dosyaları Seçiniz (Çoklu Seçim Yapabilirsiniz) </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='TopluPDF[]' id='TopluPDF' multiple onchange='DosyalariEkranaListele()'> </td>
+                        <input accept='application/pdf' type='file' name='DosyalarCoklu[]' id='DosyalarCoklu' multiple onchange='DosyalariEkranaListele()'> </td>
                 </tr>
                 <tr id='SiralamaSatiri' style='display:none;'>
                     <td colspan="2">
                         <b>Dosyalarınızın sıralamasını sürükle-bırak yaparak değiştirebilirsiniz:</b><br>
-                        <input type='hidden' id='Siralama' name='Siralama' value=''>
+                        <input type='hidden' id='BirlestirmeSiralama' name='BirlestirmeSiralama' value=''>
                         <ul id='tmpSecilenDosyalar' class='tmpSecilenDosyalar'>
                             
                         </ul>
@@ -110,7 +123,7 @@
         </fieldset>
 
 
-        
+
         <input type="button" value="Birleştir" onclick="FormuPostala('formBirlestir')" id="FormuGonder">
     </form>
 
@@ -122,7 +135,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formBol" name="formBol" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="form_adi" value="formBol">
+        <input type="hidden" name="FormAdi" value="formBol">
         
         <h2>PDF Dosyayı Böl</h2>
         
@@ -132,7 +145,7 @@
                 <tr>
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosya' multiple> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosya[]'> </td>
                 </tr>
             </table>
         </fieldset>
@@ -144,22 +157,22 @@
                 <tr>
                     <td nowrap="nowrap"> Her sayfayı ayrı PDF yap </td>
                     <td nowrap="nowrap">
-                        <input type="checkbox" name="TumunuPDFYap"> </td>
+                        <input type="checkbox" name="AyarBol1"> </td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap"> Her X sayfayı alıp, ayrı PDF'ler yap </td>
                     <td nowrap="nowrap">
-                        <input type="text" name="HerXSayfadanBol" placeholder="Örnek: 4" style="width: 250px;"> </td>
+                        <input type="text" name="AyarBol2" style="width: 250px;" placeholder="Örnek: 4"> </td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap"> Şu sayfalardan bölerek ayrı PDF'ler yap </td>
                     <td nowrap="nowrap">
-                        <input type="text" name="Bol1Sayfalar" placeholder="Örnek: 6,18,27,33" style="width: 250px;"> </td>
+                        <input type="text" name="AyarBol3" style="width: 250px;" placeholder="Örnek: 6,18,27,33"> </td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap"> Özel böl (Her ';' ayrımı ayrı bir PDF olacak) </td>
                     <td nowrap="nowrap">
-                        <input type="text" name="Bol2Sayfalar" placeholder="Örnek: 1,7,10,50-60;18-30,35-40" style="width: 250px;"> </td>
+                        <input type="text" name="AyarBol4" style="width: 250px;" placeholder="Örnek: 1,7,10,50-60;18-30,35-40"> </td>
                 </tr>
             </table>
         </fieldset>
@@ -173,7 +186,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formResim1" name="formResim1" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="form_adi" value="formResim1">
+        <input type="hidden" name="FormAdi" value="formResim1">
         
         <h2>PDF'den Resim'e</h2>
         
@@ -203,7 +216,7 @@
 
 
     <form id="formResim2" name="formResim2" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="form_adi" value="formResim2">
+        <input type="hidden" name="FormAdi" value="formResim2">
 
         <h2>Resim'den PDF'e</h2>
 
@@ -232,7 +245,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formHarmanla" name="formHarmanla" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="form_adi" value="formHarmanla">
+        <input type="hidden" name="FormAdi" value="formHarmanla">
 
         <h2>PDF Dosyaları Harmanla</h2>
 
@@ -303,7 +316,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formArayaEkle" name="formArayaEkle" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="form_adi" value="formArayaEkle">
+        <input type="hidden" name="FormAdi" value="formArayaEkle">
 
         <h2>PDF Dosyanın Arasına PDF Ekle</h2>
 
@@ -325,7 +338,7 @@
                     <td nowrap="nowrap"> Dosya</td>
                     <td nowrap="nowrap"> Hangi sayfadan sonra? </td>
                     <td nowrap="nowrap"> Eklenecek PDF </td>
-                    <td nowrap="nowrap"> Bu dosyanın hangi sayfaları eklensin? </td>
+                    <td nowrap="nowrap"> Bu dosyanın hangi sayfaları alınsın? </td>
                 </tr>
 
                 <tr style='display:none;'>
@@ -370,7 +383,7 @@
     <!-- ========================================================== -->
     <!-- ========================================================== -->
     <form id="formYonet" name="formYonet" method="post" action="" enctype="multipart/form-data">
-        <input type="hidden" name="form_adi" value="formYonet">
+        <input type="hidden" name="FormAdi" value="formYonet">
 
         <h2>Sayfaları Düzenle</h2>
 
@@ -865,7 +878,7 @@ input[type=submit] {
 
 
     function DosyalariEkranaListele() {
-        var files = $('#TopluPDF').get(0).files;
+        var files = $('#DosyalarCoklu').get(0).files;
 
         if ( $('.tmpSecilenDosyalar li').length >= 1 ) {
             $('.tmpSecilenDosyalar').dropme('destroy');
@@ -886,9 +899,9 @@ input[type=submit] {
 
         if ( $('.tmpSecilenDosyalar li').length >= 1 ) {
 
-            $('#Siralama').val('');
+            $('#BirlestirmeSiralama').val('');
             $('.tmpSecilenDosyalar li').each(function(i, li){
-                $('#Siralama').val( $('#Siralama').val() + '|' + $(li).text() );
+                $('#BirlestirmeSiralama').val( $('#BirlestirmeSiralama').val() + '|' + $(li).text() );
             })
 
             $('.tmpSecilenDosyalar').dropme({
@@ -897,12 +910,12 @@ input[type=submit] {
 
             $('.tmpSecilenDosyalar').bind('sortupdate', function(e, elm) {
                 //Triggered when the position has changed.
-                $('#Siralama').val('');
+                $('#BirlestirmeSiralama').val('');
                 $('.tmpSecilenDosyalar li').each(function(i, li){
-                    $('#Siralama').val( $('#Siralama').val() + '|' + $(li).text() );
+                    $('#BirlestirmeSiralama').val( $('#BirlestirmeSiralama').val() + '|' + $(li).text() );
                 })
 
-                // $('#Siralama').html()
+                // $('#BirlestirmeSiralama').html()
             });
 
         }
@@ -958,5 +971,37 @@ input[type=submit] {
             document.getElementById(ResimNo).className = ResimYon;
         }
     }
+
+    function FormuPostala(FormAdi) {
+
+        // AJAX ile FİLE UPLOAD
+
+        var form = $('#' + FormAdi)[0]; // Burada standart javascript objesi kullanılması gerekiyor
+        var data = new FormData(form);
+
+        // İlave değişken eklemek istersek
+        // data.append("OZEL1", "Deger1");
+        // data.append("OZEL2", "Deger2");
+
+        // Dosya Ekleme
+        // data.append('image', $('input[type=file]')[0].files[0]);
+
+        $.ajax( {
+            url        : '1test.php',
+            type       : 'POST',
+            enctype    : 'multipart/form-data',
+            data       : data,
+            cache      : false,
+            timeout    : 600000,
+            dataType   : "text",
+            processData: false,
+            contentType: false,
+            success  : function(ajaxCevap)
+            { 
+               alert(ajaxCevap); // Cevabı göster...
+            }
+        } );
+
+    } // FormuPostala
 
 </script>
