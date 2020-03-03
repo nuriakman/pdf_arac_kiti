@@ -103,9 +103,14 @@
                         <input type="checkbox" name="AyarBirlestir1"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Dosyalar arasına boş bir yaprak ekle </td>
+                    <td nowrap="nowrap"> Dosyalar arasına 1 boş sayfa ekle </td>
                     <td nowrap="nowrap">
                         <input type="checkbox" name="AyarBirlestir2"> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> Dosyalar arasına 2 boş sayfa ekle </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="AyarBirlestir3"> </td>
                 </tr>
             </table>
         </fieldset>
@@ -978,7 +983,9 @@ input[type=submit] {
 
     function FormuPostala(FormAdi) {
 
-        if( DosyaSecilmemis(FormAdi) ) {
+        var HATAVAR = 0
+        HATAVAR = DosyaSecilmemis(FormAdi);
+        if( HATAVAR == 1 ) {
             alert("Dosya seçimi yapılmamış!")
             return;
         }
@@ -1055,7 +1062,9 @@ input[type=submit] {
         if( FormAdi == "formArayaEkle" ) return ( ArayaEkleANA   == 0 || ArayaEklePDF  == 0 );
         if( FormAdi == "formYonet1"    ) return ( YonetAnaPDF    == 0 );
 
-        return true;
+        alert(FormAdi + " İçin Buraya gelmemeliydi!")
+        return true; //true: Dosya seçimi yapılmamış
+
     } // DosyaSecilmemis
 
 
