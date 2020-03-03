@@ -1,4 +1,5 @@
-<?php 
+<?php
+	require_once('1kutuphane.php');
 
     /* =======================================================
     ==========================================================
@@ -6,18 +7,32 @@
     ==========================================================
     ======================================================= */
 
+	/*
+	POST
+	    [FormAdi] => formBirlestir
+	    [AlinacakSayfalar] ARRAY
+	    [BirlestirmeSiralama] => |Notlar.pdf|5413183606.PDF|Karbon.pdf|Vue.pdf
+	    [AyarBirlestir1] => on CHECKBOX
+	    [AyarBirlestir2] => on CHECKBOX
+	    [AyarBirlestir3] => on CHECKBOX
+	FILES
+	    DosyalarTekli
+	    DosyalarCoklu
+	*/
+
 	if( isset($_POST["FormAdi"]) and $_POST["FormAdi"] == "formBirlestir" ) {
-/*
-POST
-    [FormAdi] => formBirlestir
-    [AlinacakSayfalar] ARRAY
-    [BirlestirmeSiralama] => |018-Temel-Komutlar-Ders-Notlar.pdf|5413183606-Subat 2020.PDF|Karbon Grup DNA.pdf|Vue-Essentials-Cheat-Sheet- KOPYA KAĞIDI.pdf
-    [AyarBirlestir1] => on CHECKBOX
-    [AyarBirlestir2] => on CHECKBOX
-FILES
-    DosyalarTekli
-    DosyalarCoklu
-*/		
+    	
+    	// Upload klasöründeki tüm dosyaları temizle...
+    	$KOMUT = "rm -rf upload/*";
+    	$cevap = shell_exec($KOMUT);
+
+    	// Boş Sayfayı UPLOAD klasörüne kopyala
+    	$KOMUT = sprintf("cp %s %s%s", $GENEL_AYARLAR["BOS_SAYFA"], $GENEL_AYARLAR["UPLOAD_FOLDER"], $GENEL_AYARLAR["BOS"]);
+    	$cevap = shell_exec($KOMUT);
+
+    	$arrHATA = array();
+
+    	// Seçilmiş dosyaları UPLOAD klasörüne dosya adı 0001, 0002 olacak biçimde yükle.
     	$Tekli = 0;
 	    foreach($_FILES['DosyalarTekli']['name'] as $key => $value) {
 	        if ($_FILES['DosyalarTekli']['size'][$key] > 1) {
@@ -26,16 +41,124 @@ FILES
 	    }
 
     	$Coklu = 0;
-	    foreach($_FILES['DosyalarTekli']['name'] as $key => $value) {
-	        if ($_FILES['DosyalarTekli']['size'][$key] > 1) {
+	    foreach($_FILES['DosyalarCoklu']['name'] as $key => $value) {
+	        if ($_FILES['DosyalarCoklu']['size'][$key] > 1) {
 	        	$Coklu++;
 	        }
 	    }
 
 	    if($Tekli == 0 and $Coklu == 0) {
-	    	die("Dosya seçimi yapılmadı");
+	    	$arrHATA[] = "Hiç dosya seçmediniz";
 	    }
 
+
+    	$c=0;
+
+    	$c = DosyalariYukle("DosyalarTekli", 'pdf', $c);
+
+    	if($_POST['BirlestirmeSiralama'] <> '') {
+
+    		// İlk karakter '|'. Bunu silelim...
+    		$_POST['BirlestirmeSiralama'] = substr($_POST['BirlestirmeSiralama'], 1);
+
+    		$arrSiralama = explode('|', $_POST['BirlestirmeSiralama']);
+
+    		// $_FILES değişkenini, kullanıcının belirlediği sıralamaya göre sıralayalım...
+    		foreach ($arrSiralama as $key1 => $value1) {
+    			// Sıralama aynı ise deevam et
+    			if ($_FILES['DosyalarCoklu']['name'][$key1] == $arrSiralama[$key1] ) continue;
+    			
+    			// Sıralama aynı değil. Mevcut bilgileri tmp değişkenlere koyalım
+    			$tmp1 = $_FILES['DosyalarCoklu']['name'    ][$key1];
+    			$tmp2 = $_FILES['DosyalarCoklu']['type'    ][$key1];
+    			$tmp3 = $_FILES['DosyalarCoklu']['tmp_name'][$key1];
+    			$tmp4 = $_FILES['DosyalarCoklu']['size'    ][$key1];
+    			$tmp5 = $_FILES['DosyalarCoklu']['error'   ][$key1];
+    			
+    			// Geri kalan dosyalarda arayıp sıradaki dosyayı bulalım
+    			for($i=$key1; $i < count($_FILES['DosyalarCoklu']['name']); $i++) {
+    				if( $_FILES['DosyalarCoklu']['name'][$i] == $arrSiralama[$key1] ) {
+    					// Bulduğumuza göre swap yapalım.
+    					$_FILES['DosyalarCoklu']['name'    ][$key1] = $_FILES['DosyalarCoklu']['name'    ][$i];
+    					$_FILES['DosyalarCoklu']['type'    ][$key1] = $_FILES['DosyalarCoklu']['type'    ][$i];
+    					$_FILES['DosyalarCoklu']['tmp_name'][$key1] = $_FILES['DosyalarCoklu']['tmp_name'][$i];
+    					$_FILES['DosyalarCoklu']['size'    ][$key1] = $_FILES['DosyalarCoklu']['size'    ][$i];
+    					$_FILES['DosyalarCoklu']['error'   ][$key1] = $_FILES['DosyalarCoklu']['error'   ][$i];
+    					
+    					$_FILES['DosyalarCoklu']['name'    ][$i] = $tmp1;
+    					$_FILES['DosyalarCoklu']['type'    ][$i] = $tmp2;
+    					$_FILES['DosyalarCoklu']['tmp_name'][$i] = $tmp3;
+    					$_FILES['DosyalarCoklu']['size'    ][$i] = $tmp4;
+    					$_FILES['DosyalarCoklu']['error'   ][$i] = $tmp5;
+    				}
+    			} // for
+    		} // foreach
+    	} // if($_POST['BirlestirmeSiralama'] <> '') {
+
+    	$c = DosyalariYukle("DosyalarCoklu", 'pdf', $c);
+
+
+		$temp = $_POST["AlinacakSayfalar"];
+		unset($temp[0]); // İlk eleman gizli. Kullanılmıyor...
+    	foreach ($temp as $key => $value) {
+			// 0-9, virgül ve tire karakterleri kalsın. Gerisini temizle...
+			$arrAlinacakSayfalar[] = preg_replace('/[^0-9\,\-]/i', '', $temp[$key]);
+		}
+		// print_r($arrAlinacakSayfalar);
+
+    	$arrPDFs = array();
+    	for($i=0; $i < $c; $i++) {
+    		$Desen = $arrAlinacakSayfalar[$i];
+    		$Dosya = sprintf("%04d", $i);
+    		$SayfaAdedi = PDFDosyaSayfaSayisi( $Dosya );
+    		$arrPDFs[$i]['ALIAS']       = SayidanHarf($i); // Bu fonksiyona SIFIR gönderilemez.
+    		$arrPDFs[$i]['DosyaAdi']    = $Dosya;
+    		$arrPDFs[$i]['SayfaAdedi']  = $SayfaAdedi;
+    		$arrPDFs[$i]['Alinacaklar'] = AlinacakSayfalariAyarla($Dosya, $SayfaAdedi, $Desen);
+    	}
+
+
+    	$GIRDI  = "pdftk ";
+    	$ALINAN = "cat ";
+    	$SONUC  = "output SONUC.PDF";
+    	foreach ($arrPDFs as $k => $v) {
+    		$GIRDI  .= sprintf("%s=%s ", $arrPDFs[$k]['ALIAS'], $arrPDFs[$k]['DosyaAdi']);
+    		foreach ($arrPDFs[$k]['Alinacaklar'] as $k1 => $v1) {
+    			$ALINAN .= $arrPDFs[$k]['ALIAS'] . $v1 . " ";
+    		}
+    		// Eklenen her dosya sağ sayfadan başlasın
+    		if( isset($_POST["AyarBirlestir1"]) and $_POST["AyarBirlestir1"] == "on") {
+	    		if( count($arrPDFs[$k]['Alinacaklar']) % 2 == 1 ) $ALINAN .= "W1 ";
+    		}
+    		// Dosyalar arasına 1 boş sayfa ekle
+    		if( isset($_POST["AyarBirlestir2"]) and $_POST["AyarBirlestir2"] == "on") {
+	    		$ALINAN .= "W1 ";
+    		}
+    		// Dosyalar arasına 2 boş sayfa ekle
+    		if( isset($_POST["AyarBirlestir3"]) and $_POST["AyarBirlestir3"] == "on") {
+	    		$ALINAN .= "W1 ";
+	    		$ALINAN .= "W1 ";
+    		}
+    	}
+
+    	if( !(strpos($ALINAN, "W1") === false) ) {
+    		$GIRDI .= "W=" . $GENEL_AYARLAR["BOS"] . " ";
+    	}
+
+    	$KOMUT = "cd upload;$GIRDI $ALINAN $SONUC;cd ..;";
+    	$cevap = shell_exec($KOMUT);
+    	
+    	echo $KOMUT . "\n\n";
+
+    	// print_r($arrPDFs);
+
+
+
+    	echo "***  \n";
+    	echo "================== BİRLEŞTİR \n";
+    	echo "================== BİRLEŞTİR \n";
+    	echo "================== BİRLEŞTİR \n";
+    	//die();
 	}
 
     /* =======================================================
@@ -49,10 +172,15 @@ FILES
 	}
 
 
-    echo "================================================\n";
+
+
+    echo "\n\n\n";
+    echo "============= GELEN VERİLER \n";
+    echo "============= GELEN VERİLER \n";
+    echo "============= GELEN VERİLER \n";
     echo "<h1>POST</h1>";     print_r($_POST);
     echo "<h1>FILES</h1>";    print_r($_FILES);
-
+/*
     foreach($_FILES['DosyalarTekli']['name'] as $key => $value) {
         if ($_FILES['DosyalarTekli']['size'][$key] > 1) {
         	move_uploaded_file($_FILES['DosyalarTekli']['tmp_name'][$key], "upload/TEK-" . $_FILES['DosyalarTekli']['name'][$key]);
@@ -82,7 +210,7 @@ FILES
         	move_uploaded_file($_FILES['HarmanPDF']['tmp_name'][$key], "upload/HARMAN-" . $_FILES['HarmanPDF']['name'][$key]);
         }
     }
-
+*/
 /*
 
 =======================================================================
@@ -92,6 +220,7 @@ POST
     [BirlestirmeSiralama] => |018-Temel-Komutlar-Ders-Notlar.pdf|5413183606-Subat 2020.PDF|Karbon Grup DNA.pdf|Vue-Essentials-Cheat-Sheet- KOPYA KAĞIDI.pdf
     [AyarBirlestir1] => on CHECKBOX
     [AyarBirlestir2] => on CHECKBOX
+    [AyarBirlestir3] => on CHECKBOX
 FILES
     DosyalarTekli
     DosyalarCoklu
