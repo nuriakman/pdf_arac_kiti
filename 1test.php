@@ -270,7 +270,7 @@
     			$ALINAN .= $arrPDFs[$k]['ALIAS'] . $v1 . " ";
     		}
 
-print_r($arrSONUC_Sayfalar);
+			// print_r($arrSONUC_Sayfalar);
 	    	unset($arrSONUC_Sayfalar);
 	    }
     	$KOMUT = "$GIRDI $ALINAN $SONUC";
@@ -299,9 +299,216 @@ print_r($arrSONUC_Sayfalar);
     ========================== BÖL ===========================
     ==========================================================
     ======================================================= */
-
+	/*
+	POST
+	    [FormAdi] => formBol
+	    [AyarBol1] => on CHECKBOX
+	    [AyarBol2] => 11
+	    [AyarBol3] => 22
+	    [AyarBol4] => 33
+	FILES
+		AnaDosyaBol
+	*/
 	if( isset($_POST["FormAdi"]) and $_POST["FormAdi"] == "formBol" ) {
+    	
+    	// Upload klasöründeki tüm dosyaları temizle...
+    	$KOMUT = "rm -rf upload/*";
+    	$cevap = shell_exec($KOMUT);
 
+    	$arrHATA = array();
+
+    	// Seçilmiş dosyaları UPLOAD klasörüne dosya adı 0001, 0002 olacak biçimde yükle.
+    	$Tekli = 0;
+	    foreach($_FILES['AnaDosyaBol']['name'] as $key => $value) {
+	        if ($_FILES['AnaDosyaBol']['size'][$key] > 1) {
+	        	$Tekli++;
+	        }
+	    }
+
+	    if($Tekli == 0) {
+	    	$arrHATA[] = "Hiç dosya seçmediniz";
+	    }
+
+
+    	$c=0;
+
+    	$c = DosyalariYukle("AnaDosyaBol", 'pdf', $c);
+
+		// 0-9, virgül ve tire karakterleri kalsın. Gerisini temizle...
+		$arrBol3[] = preg_replace('/[^0-9\,\-]/i', '', $_POST["AyarBol3"] );
+		$arrBol4[] = preg_replace('/[^0-9\,\-]/i', '', $_POST["AyarBol4"] );
+
+
+		$SayfaAdedi = PDFDosyaSayfaSayisi( "0000" );
+/*
+		// Her bir sayfayı ayrı PDF yap
+		if( isset($_POST["AyarBol1"]) and $_POST["AyarBol1"] == "on") {
+
+			if($SayfaAdedi < 100000) $KOMUT = "pdftk 0000 burst output Sayfa_%05d.pdf";
+			if($SayfaAdedi < 10000 ) $KOMUT = "pdftk 0000 burst output Sayfa_%04d.pdf";
+			if($SayfaAdedi < 1000  ) $KOMUT = "pdftk 0000 burst output Sayfa_%03d.pdf";
+			if($SayfaAdedi < 100   ) $KOMUT = "pdftk 0000 burst output Sayfa_%02d.pdf";
+			if($SayfaAdedi < 10    ) $KOMUT = "pdftk 0000 burst output Sayfa_%01d.pdf";
+	    	
+		    echo $KOMUT;
+		    chdir("upload");
+	    	$cevap = shell_exec($KOMUT);
+	    	chdir("../");
+		}
+
+		// Dosyayı X sayfalık parçalara böl
+		$SayfaBlogu = intval($_POST["AyarBol2"]);
+		if( isset($_POST["AyarBol2"]) and $SayfaBlogu >= 1) {
+			$Bas  = 1;
+			$Bit  = $SayfaBlogu;
+			$Bolum= 0;
+			while($Bit < $SayfaAdedi - 1) {
+				$Bas = $Bit;
+				$Bit = $Bit + $SayfaBlogu;
+				if($Bit > $SayfaAdedi) $Bit = $SayfaAdedi;
+				$Bolum++;
+				if($SayfaAdedi / $SayfaBlogu < 10000) $KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Bolum_%03d.pdf", $Bolum);
+				if($SayfaAdedi / $SayfaBlogu < 1000)  $KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Bolum_%03d.pdf", $Bolum);
+				if($SayfaAdedi / $SayfaBlogu < 100)   $KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Bolum_%02d.pdf", $Bolum);
+				if($SayfaAdedi / $SayfaBlogu < 10)    $KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Bolum_%01d.pdf", $Bolum);
+			    echo "$KOMUT\n";
+			    chdir("upload");
+		    	$cevap = shell_exec($KOMUT);
+		    	chdir("../");
+			}
+
+		}
+*/
+
+		// PDF dosyayı şu sayfalardan bölerek ayrı dosyalar yap
+		$arrSayfa = explode(",", $_POST["AyarBol3"]);
+		foreach ($arrSayfa as $key => $value) {
+			$arrSayfa[$key] = intval($value);
+			if($arrSayfa[$key] > $SayfaAdedi) $arrSayfa[$key] = $SayfaAdedi;
+		}
+		$arrSayfa = array_unique($arrSayfa);
+		asort($arrSayfa);
+		$arrSayfa[] = $SayfaAdedi+1;
+
+		$Bas   = 1;
+		$Bolum = 0;
+		for($i=0; $i<count($arrSayfa); $i++) {
+			$Bit = $arrSayfa[$i] - 1;
+			$KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Sayfalar_{$Bas}-{$Bit}.pdf", $Bolum);
+			$Bas = $Bit + 1;
+		    echo "$KOMUT\n";
+		    chdir("upload");
+	    	$cevap = shell_exec($KOMUT);
+	    	chdir("../");
+		}
+
+print_r($arrSayfa); die();
+
+		if( isset($_POST["AyarBol2"]) and $SayfaBlogu >= 1) {
+			$Bas  = 1;
+			$Bit  = $SayfaBlogu;
+			$Bolum= 0;
+			while($Bit < $SayfaAdedi - 1) {
+				$Bas = $Bit;
+				$Bit = $Bit + $SayfaBlogu;
+				if($Bit > $SayfaAdedi) $Bit = $SayfaAdedi;
+				$Bolum++;
+				if($SayfaAdedi / $SayfaBlogu < 10000) $KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Bolum_%03d.pdf", $Bolum);
+				if($SayfaAdedi / $SayfaBlogu < 1000)  $KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Bolum_%03d.pdf", $Bolum);
+				if($SayfaAdedi / $SayfaBlogu < 100)   $KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Bolum_%02d.pdf", $Bolum);
+				if($SayfaAdedi / $SayfaBlogu < 10)    $KOMUT = sprintf("pdftk 0000 cat {$Bas}-{$Bit} output Bolum_%01d.pdf", $Bolum);
+			    echo "$KOMUT\n";
+			    chdir("upload");
+		    	$cevap = shell_exec($KOMUT);
+		    	chdir("../");
+			}
+
+		}
+
+die("\n\nBİTTİ...");
+		// print_r($arrBol1);
+
+    	$arrPDFs = array();
+    	for($i=0; $i < $c; $i++) {
+    		$Desen3 = $arrBol3[$i];
+    		$Desen4 = $arrBol4[$i];
+    		$Dosya = sprintf("%04d", $i);
+    		$SayfaAdedi = PDFDosyaSayfaSayisi( $Dosya );
+    		$arrPDFs[$i]['ALIAS']       = SayidanHarf($i); // Bu fonksiyona SIFIR gönderilemez.
+    		$arrPDFs[$i]['DosyaAdi']    = $Dosya;
+    		$arrPDFs[$i]['SayfaAdedi']  = $SayfaAdedi;
+    		$arrPDFs[$i]['Sayfalar3']    = AlinacakSayfalariAyarla($Dosya, $SayfaAdedi, $Desen3);
+    		$arrPDFs[$i]['Sayfalar4']    = AlinacakSayfalariAyarla($Dosya, $SayfaAdedi, $Desen4);
+    	}
+
+		//print_r($arrPDFs);
+
+		$TekleriSil  = 0;
+		$CiftleriSil = 0;
+
+		// Dosyalar arasına 1 boş sayfa ekle
+		if( isset($_POST["AyarBol2"]) and $_POST["AyarBol2"] == "on") {
+    		$TekleriSil = 1;
+		}
+		// Dosyalar arasına 2 boş sayfa ekle
+		if( isset($_POST["AyarBol3"]) and $_POST["AyarBol3"] == "on") {
+    		$CiftleriSil = 1;
+		}
+    	
+    	$GIRDI  = "pdftk ";
+    	$ALINAN = "cat ";
+    	$SONUC  = "output SONUC.PDF";
+
+    	
+    	foreach ($arrPDFs as $k => $v) {
+
+			// Girdi için ALIAS belirleyelim...
+			$GIRDI  .= sprintf("%s=%s ", $arrPDFs[$k]['ALIAS'], $arrPDFs[$k]['DosyaAdi']);
+
+    		$arrSONUC_Sayfalar = array();
+	    	for($SayfaNo=1; $SayfaNo <= $arrPDFs[$k]['SayfaAdedi']; $SayfaNo++) {
+
+	    		$Sil = 0;
+
+	    		if($TekleriSil == 1) { // Tek Sayfaları Sil
+					if($SayfaNo % 2 == 1) $Sil = 1;
+				}
+	    		if($CiftleriSil == 1) { // Çift Sayfaları Sil
+					if($SayfaNo % 2 == 0) $Sil = 1;
+				}
+
+				// İstenmayen sayfaları sil
+				if(in_array($SayfaNo, $arrPDFs[$k]['Sayfalar'])) $Sil = 1;
+
+				// Silinmesi istenmemişsa bize lazım olan sayfadır.
+				if($Sil == 0) $arrSONUC_Sayfalar[] = $SayfaNo;
+
+	    	}
+
+    		foreach ($arrSONUC_Sayfalar as $k1 => $v1) {
+    			$ALINAN .= $arrPDFs[$k]['ALIAS'] . $v1 . " ";
+    		}
+
+			// print_r($arrSONUC_Sayfalar);
+	    	unset($arrSONUC_Sayfalar);
+	    }
+    	$KOMUT = "$GIRDI $ALINAN $SONUC";
+	    
+	    chdir("upload");
+    	$cevap = shell_exec($KOMUT);
+    	chdir("../");
+    	
+    	echo "KOMUT:\n" . $KOMUT . "\n\n";
+
+    	// print_r($arrPDFs);
+
+
+
+    	echo "***  \n";
+    	echo "================== SİL \n";
+    	echo "================== SİL \n";
+    	echo "================== SİL \n";
+    	//die();
 	}
 
 

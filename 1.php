@@ -17,7 +17,7 @@
     <!-- ======================= BİRLEŞTİR ======================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formBirlestir" name="formBirlestir" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formBirlestir" name="formBirlestir" method="" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formBirlestir">
         
         <h2>PDF Dosyaları Birleştir</h2>
@@ -127,7 +127,7 @@
     <!-- =========================== SİL ========================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formSil" name="formSil" method="post" action="" enctype="multipart/form-data">
+    <form id="formSil" name="formSil" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formSil">
         
         <h2>PDF Dosyadan Sayfa Sil</h2>
@@ -175,7 +175,7 @@
     <!-- =========================== BÖL ========================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formBol" name="formBol" method="post" action="" enctype="multipart/form-data">
+    <form id="formBol" name="formBol" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formBol">
         
         <h2>PDF Dosyayı Böl</h2>
@@ -226,7 +226,7 @@
     <!-- =========================== RESİM ======================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formResim1" name="formResim1" method="post" action="" enctype="multipart/form-data">
+    <form id="formResim1" name="formResim1" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formResim1">
         
         <h2>PDF'den Resim'e</h2>
@@ -256,7 +256,7 @@
 
 
 
-    <form id="formResim2" name="formResim2" method="post" action="" enctype="multipart/form-data">
+    <form id="formResim2" name="formResim2" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formResim2">
 
         <h2>Resim'den PDF'e</h2>
@@ -290,7 +290,7 @@
     <!-- ======================= HARMANLA ========================= -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formHarmanla" name="formHarmanla" method="post" action="" enctype="multipart/form-data">
+    <form id="formHarmanla" name="formHarmanla" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formHarmanla">
 
         <h2>PDF Dosyaları Harmanla</h2>
@@ -361,7 +361,7 @@
     <!-- ======================= ARAYA EKLE ======================= -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formArayaEkle" name="formArayaEkle" method="post" action="" enctype="multipart/form-data">
+    <form id="formArayaEkle" name="formArayaEkle" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formArayaEkle">
 
         <h2>PDF Dosyanın Arasına PDF Ekle</h2>
@@ -428,7 +428,7 @@
     <!-- ========================== YONET ========================= -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formYonet1" name="formYonet1" method="post" action="" enctype="multipart/form-data">
+    <form id="formYonet1" name="formYonet1" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formYonet1">
 
         <h2>Sayfaları Düzenle</h2>
@@ -448,7 +448,7 @@
     </form>
 
 
-    <form id="formYonet2" name="formYonet2" method="post" action="" enctype="multipart/form-data">
+    <form id="formYonet2" name="formYonet2" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formYonet2">
 
         <h2>Sayfa Yönü Değiştir / Sırala</h2>
