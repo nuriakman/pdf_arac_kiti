@@ -139,8 +139,13 @@
                 }
 
                 if( $arrAralik[1] == "" ) {
-                    // 15- gibi bir şey yazılmış. Yani, 15 ve sonrası. Onu uyarlayalım...
+                    // 15- gibi bir şey yazılmış. Yani, 15 ve sonrası
                     $arrAralik[1] = $SayfaAdedi;
+                }
+
+                if( $arrAralik[0] == "" ) {
+                    // -15 gibi bir şey yazılmış. Yani, 15 ve öncesi
+                    $arrAralik[0] = 1;
                 }
 
                 for($i=$arrAralik[0]; $i <= $arrAralik[1]; $i++) {
