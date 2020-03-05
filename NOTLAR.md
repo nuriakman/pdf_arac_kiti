@@ -1,7 +1,28 @@
 ##  TODO
 - Parola korumalı dosyalar
 - Dosyaya parola koyma
+- Yazdırma engeli koyma
 - Dosyayadan parola kaldırma
+- PDF Dosya tamir etme  pdftk broken.pdf output fixed.pdf
+- Uncompress PDF page streams for editing the PDF in a text editor (e.g., vim, emacs) pdftk doc.pdf output doc.unc.pdf uncompress
+
+* Merge PDF Documents
+* Collate PDF Page Scans
+* Split PDF Pages into a New Document
+* Rotate PDF Documents or Pages
+* Decrypt Input as Necessary (Password Required)
+* Encrypt Output as Desired
+* Fill PDF Forms with X/FDF Data and/or Flatten Forms
+* Generate FDF Data Stencils from PDF Forms
+* Apply a Background Watermark or a Foreground Stamp
+* Report PDF Metrics, Bookmarks and Metadata
+* Add/Update PDF Bookmarks or Metadata
+* Attach Files to PDF Pages or the PDF Document
+* Unpack PDF Attachments
+* Burst a PDF Document into Single Pages
+* Uncompress and Re-Compress Page Streams
+* Repair Corrupted PDF (Where Possible)
+ 
 
 
 ## Faydalı Kaynaklar
@@ -50,7 +71,9 @@ output
 ```
 pdftk
 	Renk1.pdf
-	burst
+burst
+output
+	Renk_%04d.pdf
 ```
 
 ## SAYFA SİLME
