@@ -17,7 +17,7 @@
     <!-- ======================= BİRLEŞTİR ======================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formBirlestir" name="formBirlestir" method="post" action="" enctype="multipart/form-data">
+    <form id="formBirlestir" name="formBirlestir" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formBirlestir">
         
         <h2>PDF Dosyaları Birleştir</h2>
@@ -119,6 +119,54 @@
 
         <input type="button" value="Birleştir" onclick="FormuPostala('formBirlestir')" id="FormuGonder">
     </form>
+
+
+
+    <!-- ========================================================== -->
+    <!-- ========================================================== -->
+    <!-- =========================== SİL ========================== -->
+    <!-- ========================================================== -->
+    <!-- ========================================================== -->
+    <form id="formSil" name="formSil" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden" name="FormAdi" value="formSil">
+        
+        <h2>PDF Dosyadan Sayfa Sil</h2>
+        
+        <fieldset>
+            <legend><b style='color: darkred;'>PDF Dosyanız:</b></legend>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
+                    <td nowrap="nowrap">
+                        <input accept='application/pdf' type='file' name='AnaDosyaSil[]'> </td>
+                </tr>
+            </table>
+        </fieldset>
+
+
+        <fieldset>
+            <legend><b style='color: darkred;'>PDF'den Sayfa Silme Seçenekleri:</b></legend>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td nowrap="nowrap"> Şu sayfaları sil </td>
+                    <td nowrap="nowrap">
+                        <input type="text" name="AyarSil1" style="width: 250px;" placeholder="Örnek: 1,7,10,50-60"> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> Tüm TEK sayfaları sil </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="AyarSil2"> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> Tüm ÇİFT sayfaları sil </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="AyarSil3"> </td>
+                </tr>
+            </table>
+        </fieldset>
+        <input type="button" value="Sayfaları Sil" onclick="FormuPostala('formSil')" id="FormuGonder">
+    </form>
+
 
 
 
@@ -643,7 +691,8 @@
         margin-bottom: 30px;        
     }
 
-    #formBirlestir  {border-left: 15px solid #FF5722; padding-left: 20px; }
+    #formBirlestir  {border-left: 15px solid #E64A19; padding-left: 20px; }
+    #formSil        {border-left: 15px solid #FF5722; padding-left: 20px; }
     #formBol        {border-left: 15px solid #FF9800; padding-left: 20px; }
     #formResim1     {border-left: 15px solid #FFEA00; padding-left: 20px; }
     #formResim2     {border-left: 15px solid #C6FF00; padding-left: 20px; }
@@ -1026,6 +1075,7 @@ input[type=submit] {
     // Dosya Yükleme bölümünde seçim yapılıp yapılmadığı kontrolü
     var DosyalarTekli    = 0;
     var DosyalarCoklu    = 0;
+    var AnaDosyaSil      = 0;
     var AnaDosyaBol      = 0;
     var AnaDosyaResim1   = 0;
     var AnaDosyaResim2   = 0;
@@ -1039,6 +1089,7 @@ input[type=submit] {
         $(document).on('change', 'input:file', function() {
             if( this.name == "DosyalarTekli[]"  ) DosyalarTekli    = 1;
             if( this.name == "DosyalarCoklu[]"  ) DosyalarCoklu    = 1;
+            if( this.name == "AnaDosyaSil[]"    ) AnaDosyaSil      = 1;
             if( this.name == "AnaDosyaBol[]"    ) AnaDosyaBol      = 1;
             if( this.name == "AnaDosyaResim1[]" ) AnaDosyaResim1   = 1;
             if( this.name == "AnaDosyaResim2[]" ) AnaDosyaResim2   = 1;
@@ -1055,6 +1106,7 @@ input[type=submit] {
     function DosyaSecilmemis(FormAdi){
 
         if( FormAdi == "formBirlestir" ) return ( DosyalarTekli  == 0 && DosyalarCoklu == 0 );
+        if( FormAdi == "formSil"       ) return ( AnaDosyaSil    == 0 );
         if( FormAdi == "formBol"       ) return ( AnaDosyaBol    == 0 );
         if( FormAdi == "formResim1"    ) return ( AnaDosyaResim1 == 0 );
         if( FormAdi == "formResim2"    ) return ( AnaDosyaResim2 == 0 );

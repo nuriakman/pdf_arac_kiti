@@ -145,8 +145,12 @@
     		$GIRDI .= "W=" . $GENEL_AYARLAR["BOS"] . " ";
     	}
 
-    	$KOMUT = "cd upload;$GIRDI $ALINAN $SONUC;cd ..;";
+    	$KOMUT = "$GIRDI $ALINAN $SONUC";
+	    
+	    chdir("upload");
     	$cevap = shell_exec($KOMUT);
+    	chdir("../");
+
     	
     	echo $KOMUT . "\n\n";
 
@@ -163,7 +167,136 @@
 
     /* =======================================================
     ==========================================================
-    ======================= BİRLEŞTİR ========================
+    ========================== SİL ===========================
+    ==========================================================
+    ======================================================= */
+	/*
+	POST
+	    [FormAdi] => formSil
+	    [AyarSil1] => 123
+	    [AyarSil2] => on
+	    [AyarSil3] => on
+	FILES
+		AnaDosyaSil
+
+	*/
+
+	if( isset($_POST["FormAdi"]) and $_POST["FormAdi"] == "formSil" ) {
+    	
+    	// Upload klasöründeki tüm dosyaları temizle...
+    	$KOMUT = "rm -rf upload/*";
+    	$cevap = shell_exec($KOMUT);
+
+    	$arrHATA = array();
+
+    	// Seçilmiş dosyaları UPLOAD klasörüne dosya adı 0001, 0002 olacak biçimde yükle.
+    	$Tekli = 0;
+	    foreach($_FILES['AnaDosyaSil']['name'] as $key => $value) {
+	        if ($_FILES['AnaDosyaSil']['size'][$key] > 1) {
+	        	$Tekli++;
+	        }
+	    }
+
+	    if($Tekli == 0) {
+	    	$arrHATA[] = "Hiç dosya seçmediniz";
+	    }
+
+
+    	$c=0;
+
+    	$c = DosyalariYukle("AnaDosyaSil", 'pdf', $c);
+
+		// 0-9, virgül ve tire karakterleri kalsın. Gerisini temizle...
+		$arrSilinecekSayfalar[] = preg_replace('/[^0-9\,\-]/i', '', $_POST["AyarSil1"] );
+
+		// print_r($arrSilinecekSayfalar);
+
+    	$arrPDFs = array();
+    	for($i=0; $i < $c; $i++) {
+    		$Desen = $arrSilinecekSayfalar[$i];
+    		$Dosya = sprintf("%04d", $i);
+    		$SayfaAdedi = PDFDosyaSayfaSayisi( $Dosya );
+    		$arrPDFs[$i]['ALIAS']       = SayidanHarf($i); // Bu fonksiyona SIFIR gönderilemez.
+    		$arrPDFs[$i]['DosyaAdi']    = $Dosya;
+    		$arrPDFs[$i]['SayfaAdedi']  = $SayfaAdedi;
+    		$arrPDFs[$i]['Sayfalar']    = AlinacakSayfalariAyarla($Dosya, $SayfaAdedi, $Desen);
+    	}
+
+		//print_r($arrPDFs);
+
+		$TekleriSil  = 0;
+		$CiftleriSil = 0;
+
+		// Dosyalar arasına 1 boş sayfa ekle
+		if( isset($_POST["AyarSil2"]) and $_POST["AyarSil2"] == "on") {
+    		$TekleriSil = 1;
+		}
+		// Dosyalar arasına 2 boş sayfa ekle
+		if( isset($_POST["AyarSil3"]) and $_POST["AyarSil3"] == "on") {
+    		$CiftleriSil = 1;
+		}
+    	
+    	$GIRDI  = "pdftk ";
+    	$ALINAN = "cat ";
+    	$SONUC  = "output SONUC.PDF";
+
+    	
+    	foreach ($arrPDFs as $k => $v) {
+
+			// Girdi için ALIAS belirleyelim...
+			$GIRDI  .= sprintf("%s=%s ", $arrPDFs[$k]['ALIAS'], $arrPDFs[$k]['DosyaAdi']);
+
+    		$arrSONUC_Sayfalar = array();
+	    	for($SayfaNo=1; $SayfaNo <= $arrPDFs[$k]['SayfaAdedi']; $SayfaNo++) {
+
+	    		$Sil = 0;
+
+	    		if($TekleriSil == 1) { // Tek Sayfaları Sil
+					if($SayfaNo % 2 == 1) $Sil = 1;
+				}
+	    		if($CiftleriSil == 1) { // Çift Sayfaları Sil
+					if($SayfaNo % 2 == 0) $Sil = 1;
+				}
+
+				// İstenmayen sayfaları sil
+				if(in_array($SayfaNo, $arrPDFs[$k]['Sayfalar'])) $Sil = 1;
+
+				// Silinmesi istenmemişsa bize lazım olan sayfadır.
+				if($Sil == 0) $arrSONUC_Sayfalar[] = $SayfaNo;
+
+	    	}
+
+    		foreach ($arrSONUC_Sayfalar as $k1 => $v1) {
+    			$ALINAN .= $arrPDFs[$k]['ALIAS'] . $v1 . " ";
+    		}
+
+print_r($arrSONUC_Sayfalar);
+	    	unset($arrSONUC_Sayfalar);
+	    }
+    	$KOMUT = "$GIRDI $ALINAN $SONUC";
+	    
+	    chdir("upload");
+    	$cevap = shell_exec($KOMUT);
+    	chdir("../");
+    	
+    	echo "KOMUT:\n" . $KOMUT . "\n\n";
+
+    	// print_r($arrPDFs);
+
+
+
+    	echo "***  \n";
+    	echo "================== SİL \n";
+    	echo "================== SİL \n";
+    	echo "================== SİL \n";
+    	//die();
+	}
+
+
+
+    /* =======================================================
+    ==========================================================
+    ========================== BÖL ===========================
     ==========================================================
     ======================================================= */
 
@@ -224,6 +357,14 @@ POST
 FILES
     DosyalarTekli
     DosyalarCoklu
+=======================================================================
+POST
+    [FormAdi] => formSil
+    [AyarSil1] => 123
+    [AyarSil2] => on
+    [AyarSil3] => on
+FILES
+	AnaDosyaSil
 =======================================================================
 POST
     [FormAdi] => formBol
