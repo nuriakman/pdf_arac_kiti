@@ -175,7 +175,7 @@
     <!-- =========================== BÖL ========================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formBol" name="formBol" method="post" action="" enctype="multipart/form-data" style="display:none1">
+    <form id="formBol" name="formBol" method="post" action="" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formBol">
         
         <h2>PDF Dosyayı Böl</h2>
@@ -245,9 +245,19 @@
                         <input type="checkbox" name="AyarResimPDFYap1"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> PDF'in her sayfasını resim dosyası olarak çıkar </td>
+                    <td nowrap="nowrap"> PDF'in her sayfasını JPG dosyası olarak çıkar </td>
                     <td nowrap="nowrap">
-                        <input type="checkbox" name="AyarResimPDFYap2"> </td>
+                        <input type="checkbox" name="AyarResimPDFYap2">
+                        <select name="AyarResimPDFYap3" style='width:250px;margin-left: 20px;'>
+                            <option value="70">JPG Dosyasının Kalitesi: 75</option>
+                            <option value="50">50</option>
+                            <option value="60">60</option>
+                            <option value="70">70</option>
+                            <option value="75">75</option>
+                            <option value="80">80</option>
+                            <option value="85">85</option>
+                            <option value="90">90</option>
+                        </select> </td>
                 </tr>
             </table>
         </fieldset>
@@ -279,6 +289,14 @@
                     <td nowrap="nowrap">
                         <input type="checkbox" name="AyarResim2"> </td>
                 </tr>
+                <tr>
+                    <td nowrap="nowrap"> A4 Kağıt Yönü </td>
+                    <td nowrap="nowrap">
+                        <select name="AyarResim3" style='width:300px;'>
+                            <option value="P">Kağıt Yönü: A4, Dikey (Portrait)</option>
+                            <option value="L">Kağıt Yönü: A4, Yatay (Landscape)</option>
+                        </select> </td>
+                </tr>
             </table>
         </fieldset>
         <input type="button" value="Başla !" onclick="FormuPostala('formResim2')" id="FormuGonder">
@@ -290,7 +308,7 @@
     <!-- ======================= HARMANLA ========================= -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formHarmanla" name="formHarmanla" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formHarmanla" name="formHarmanla" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formHarmanla">
 
         <h2>PDF Dosyaları Harmanla</h2>
@@ -313,10 +331,10 @@
                         <input accept='application/pdf' type='file' name='HarmanPDF[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='Harman_AlinacakSayfalar[]' value='' placeholder='Örnek: 4' style='width: 250px;'>
+                        <input type='text' name='Harman_Adet[]' value='1' placeholder='Örnek: 4' style='width: 250px;'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='Harman_BaslamaSayfasi[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
+                        <input type='text' name='Harman_Baslama[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
                     </td>
                 </tr>
 
@@ -328,10 +346,10 @@
                         <input accept='application/pdf' type='file' name='HarmanPDF[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='Harman_AlinacakSayfalar[]' value='' placeholder='Örnek: 4' style='width: 250px;'>
+                        <input type='text' name='Harman_Adet[]' value='1' placeholder='Örnek: 4' style='width: 250px;'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='Harman_BaslamaSayfasi[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
+                        <input type='text' name='Harman_Baslama[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
                     </td>
                 </tr>
 
@@ -343,10 +361,10 @@
                         <input accept='application/pdf' type='file' name='HarmanPDF[]'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='Harman_AlinacakSayfalar[]' value='' placeholder='Örnek: 4' style='width: 250px;'>
+                        <input type='text' name='Harman_Adet[]' value='1' placeholder='Örnek: 4' style='width: 250px;'>
                     </td>
                     <td nowrap='nowrap'>
-                        <input type='text' name='Harman_BaslamaSayfasi[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
+                        <input type='text' name='Harman_Baslama[]' value='1' placeholder='Örnek: 1' style='width: 250px;'>
                     </td>
                 </tr>
 
@@ -361,7 +379,7 @@
     <!-- ======================= ARAYA EKLE ======================= -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formArayaEkle" name="formArayaEkle" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formArayaEkle" name="formArayaEkle" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formArayaEkle">
 
         <h2>PDF Dosyanın Arasına PDF Ekle</h2>
@@ -428,7 +446,7 @@
     <!-- ========================== YONET ========================= -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formYonet1" name="formYonet1" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formYonet1" name="formYonet1" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formYonet1">
 
         <h2>Sayfaları Düzenle</h2>
@@ -448,7 +466,7 @@
     </form>
 
 
-    <form id="formYonet2" name="formYonet2" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formYonet2" name="formYonet2" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formYonet2">
 
         <h2>Sayfa Yönü Değiştir / Sırala</h2>
