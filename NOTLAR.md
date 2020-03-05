@@ -5,6 +5,7 @@
 - Dosyayadan parola kaldırma
 - PDF Dosya tamir etme  pdftk broken.pdf output fixed.pdf
 - Uncompress PDF page streams for editing the PDF in a text editor (e.g., vim, emacs) pdftk doc.pdf output doc.unc.pdf uncompress
+- pdfcrop --margins "-15 -50 0 -140" extracted_page.pdf
 
 * Merge PDF Documents
 * Collate PDF Page Scans
@@ -92,3 +93,42 @@ output
 
 	SONUC.pdf
 ```
+
+## PDF'in sayfalarını .JPG yapma
+- `convert` takes the PDF, renders it at some resolution, and uses the resulting bitmap as the source image.
+- `pdfimages` looks through the PDF for embedded bitmap images and exports each one to a file. It simply ignores any text or vector drawing commands in the PDF.
+
+```
+pdfimages -j kitap.pdf Sayfa
+pdfimages -f 1 -l 1 kitap.pdf resimler/Sayfa
+
+convert -density 300 file.pdf Sayfa_%04d.jpg
+convert -density 150 input.pdf -quality 90 output.png
+convert -density 150 input.pdf[66] -quality 90 output.png // Sadece 66. Sayfayı resim yap
+
+
+pdftoppm input.pdf outputname -png
+pdftoppm input.pdf outputname -png -f {66} -singlefile   // Sadece 66. Sayfayı resim yap
+
+```
+
+## JPG dosyaları PDF yapma
+```
+convert image1.jpg image2.png image3.bmp output.pdf
+
+convert *.jpg MYPDF%03d.pdf
+
+convert -compress jpeg * outputFile.pdf
+
+^T paper size from portrait into landscape.
+
+// Kağıdı yatay kullan
+img2pdf --output out1.pdf --pagesize A4^T 0*
+
+// Kağıdı dikey kullan
+img2pdf --output out2.pdf --pagesize A4 0*
+
+
+```
+
+
