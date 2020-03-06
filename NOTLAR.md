@@ -6,6 +6,8 @@
 - PDF Dosya tamir etme  pdftk broken.pdf output fixed.pdf
 - Uncompress PDF page streams for editing the PDF in a text editor (e.g., vim, emacs) pdftk doc.pdf output doc.unc.pdf uncompress
 - pdfcrop --margins "-15 -50 0 -140" extracted_page.pdf
+- PDF'den Resim'e ÇOKLU DOSYA SEÇİMİ olabilir
+- SAYFALARI DÜZENLE ekranında silme için de icon eklenebilir
 
 * Merge PDF Documents
 * Collate PDF Page Scans
