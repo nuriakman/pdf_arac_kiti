@@ -17,11 +17,11 @@
     <!-- ======================= BİRLEŞTİR ======================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formBirlestir" name="formBirlestir" method="" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formBirlestir" name="formBirlestir" method="a" action="s" enctype="multipart/form-data" style="display:none">
         <input type="hidden" name="FormAdi" value="formBirlestir">
-        
+
         <h2>PDF Dosyaları Birleştir</h2>
-        
+
         <fieldset>
             <legend><b style='color: darkred;'>Tek Tek PDF Dosya Seçimi:</b> <input type='button' value='1 PDF Daha Ekle' onclick='YeniDosyaEkle(1)'></legend>
             <table border="1" cellpadding="10" cellspacing="0" id="tableBirlestirme1">
@@ -30,7 +30,7 @@
                     <td nowrap="nowrap"> Birleştirilecek PDF dosyayı seçiniz </td>
                     <td nowrap="nowrap"> Bu dosyanın hangi sayfaları alınsın? </td>
                 </tr>
-                
+
                 <tr style='display:none;'>
                     <td nowrap='nowrap' style='font-size: 30px; text-align: center;'>
                         YENİ
@@ -86,7 +86,7 @@
                         <b>Dosyalarınızın sıralamasını sürükle-bırak yaparak değiştirebilirsiniz:</b><br>
                         <input type='hidden' id='BirlestirmeSiralama' name='BirlestirmeSiralama' value=''>
                         <ul id='tmpSecilenDosyalar' class='tmpSecilenDosyalar'>
-                            
+
                         </ul>
                     </td>
                 </tr>
@@ -127,18 +127,18 @@
     <!-- =========================== SİL ========================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formSil" name="formSil" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formSil" name="formSil" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formSil">
-        
+
         <h2>PDF Dosyadan Sayfa Sil</h2>
-        
+
         <fieldset>
             <legend><b style='color: darkred;'>PDF Dosyanız:</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
-                    <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
+                    <td nowrap="nowrap"> Üzerinde çalışacağınız dosya (Çoklu Seçim)</td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosyaSil[]'> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosyaSil[]' multiple> </td>
                 </tr>
             </table>
         </fieldset>
@@ -148,7 +148,7 @@
             <legend><b style='color: darkred;'>PDF'den Sayfa Silme Seçenekleri:</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
-                    <td nowrap="nowrap"> Şu sayfaları sil </td>
+                    <td nowrap="nowrap"> Sadece şu sayfaları sil </td>
                     <td nowrap="nowrap">
                         <input type="text" name="AyarSil1" style="width: 250px;" placeholder="Örnek: 1,7,10,50-60"> </td>
                 </tr>
@@ -175,11 +175,11 @@
     <!-- =========================== BÖL ========================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formBol" name="formBol" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formBol" name="formBol" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formBol">
-        
+
         <h2>PDF Dosyayı Böl</h2>
-        
+
         <fieldset>
             <legend><b style='color: darkred;'>PDF Dosyanız:</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
@@ -226,18 +226,18 @@
     <!-- =========================== RESİM ======================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formResim1" name="formResim1" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formResim1" name="formResim1" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formResim1">
-        
+
         <h2>PDF'den Resim'e</h2>
-        
+
         <fieldset>
             <legend><b style='color: darkred;'>PDF'den Resim Üret:</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
-                    <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
+                    <td nowrap="nowrap"> Üzerinde çalışacağınız dosya (Çoklu Seçim) </td>
                     <td nowrap="nowrap">
-                        <input accept='application/pdf' type='file' name='AnaDosyaResim1[]'> </td>
+                        <input accept='application/pdf' type='file' name='AnaDosyaResim1[]' multiple> </td>
                 </tr>
                 <tr>
                     <td nowrap="nowrap"> PDF içindeki tüm resimleri çıkar </td>
@@ -266,7 +266,7 @@
 
 
 
-    <form id="formResim2" name="formResim2" method="post" action="" enctype="multipart/form-data" style="display:none">
+    <form id="formResim2" name="formResim2" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formResim2">
 
         <h2>Resim'den PDF'e</h2>
@@ -370,6 +370,7 @@
 
             </table>
         </fieldset>
+        <p><b>NOT: </b>Harmanlanacak dosyaların herhangi biri biterse işlem sonlandırılır</p>
         <input type="button" value="Harmanla" onclick="FormuPostala('formHarmanla')" id="FormuGonder">
     </form>
 
@@ -458,7 +459,7 @@
                     <td nowrap="nowrap"> Üzerinde çalışacağınız dosya </td>
                     <td nowrap="nowrap">
                         <input accept='application/pdf' type='file' name='YonetAnaPDF[]'> </td>
-                    <td nowrap="nowrap"> 
+                    <td nowrap="nowrap">
                         <input type="button" value="Başla !" onclick="FormuPostala('formYonet1')" id="FormuGonder"> </td>
                 </tr>
             </table>
@@ -477,7 +478,7 @@
             <legend><b style='color: darkred;'>SAYFALARI DÜZENLE</b></legend>
 
             <ul class="PDFSayfalari">
-                
+
                 <li>
                     <img id='0' src='pul/sayfa-0000.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='0'>
@@ -490,7 +491,7 @@
                     <div class='LabelYON' onclick="Cevir1(0, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: TEST</span>
                 </li>
-                
+
                 <li>
                     <img id='1' src='pul/sayfa-0001.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='1'>
@@ -503,7 +504,7 @@
                     <div class='LabelYON' onclick="Cevir1(1, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 1</span>
                 </li>
-                
+
                 <li>
                     <img id='2' src='pul/sayfa-0002.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='2'>
@@ -516,7 +517,7 @@
                     <div class='LabelYON' onclick="Cevir1(2, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 2</span>
                 </li>
-                
+
                 <li>
                     <img id='3' src='pul/sayfa-0003.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='3'>
@@ -529,7 +530,7 @@
                     <div class='LabelYON' onclick="Cevir1(3, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 3</span>
                 </li>
-                
+
                 <li>
                     <img id='4' src='pul/sayfa-0004.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='4'>
@@ -542,7 +543,7 @@
                     <div class='LabelYON' onclick="Cevir1(4, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 4</span>
                 </li>
-                
+
                 <li>
                     <img id='5' src='pul/sayfa-0005.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='5'>
@@ -555,7 +556,7 @@
                     <div class='LabelYON' onclick="Cevir1(5, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 5</span>
                 </li>
-                
+
                 <li>
                     <img id='6' src='pul/sayfa-0006.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='6'>
@@ -568,7 +569,7 @@
                     <div class='LabelYON' onclick="Cevir1(6, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 6</span>
                 </li>
-                
+
                 <li>
                     <img id='7' src='pul/sayfa-0007.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='7'>
@@ -581,7 +582,7 @@
                     <div class='LabelYON' onclick="Cevir1(7, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 7</span>
                 </li>
-                
+
                 <li>
                     <img id='8' src='pul/sayfa-0008.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='8'>
@@ -594,7 +595,7 @@
                     <div class='LabelYON' onclick="Cevir1(8, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 8</span>
                 </li>
-                
+
                 <li>
                     <img id='9' src='pul/sayfa-0009.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='9'>
@@ -607,7 +608,7 @@
                     <div class='LabelYON' onclick="Cevir1(9, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 9</span>
                 </li>
-                
+
                 <li>
                     <img id='10' src='pul/sayfa-0010.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='10'>
@@ -620,7 +621,7 @@
                     <div class='LabelYON' onclick="Cevir1(10, 'DIK', this.value)"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 10</span>
                 </li>
-                
+
                 <li>
                     <img id='11' src='pul/sayfa-0011.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='11'>
@@ -633,7 +634,7 @@
                     <div class='LabelYON' onclick="Cevir1(11, 'DIK')"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 11</span>
                 </li>
-                
+
                 <li>
                     <img id='12' src='pul/sayfa-0012.jpg'>
                     <input type='hidden' name='sayfa_no[]' value='12'>
@@ -646,14 +647,14 @@
                     <div class='LabelYON' onclick="Cevir1(12, 'DIK')"> &#8645; </div>
                     <span class='SayfaNo'>Sayfa: 12</span>
                 </li>
-                
+
             </ul> <!-- /PDFSayfalari -->
 
             <br style='clear: both; '>
         </fieldset>
 
         <h2>Sayfa Sil / Boş Sayfa Ekle</h2>
-        
+
         <fieldset>
             <legend><b style='color: darkred;'>Sayfa Sil / Boş Sayfa Ekle</b></legend>
             <table border="1" cellpadding="10" cellspacing="0">
@@ -706,7 +707,7 @@
     }
 
     fieldset {
-        margin-bottom: 30px;        
+        margin-bottom: 30px;
     }
 
     #formBirlestir  {border-left: 15px solid #E64A19; padding-left: 20px; }
@@ -798,19 +799,19 @@
         border: 1px solid #33691E;
         cursor: pointer;
     }
-    
+
     .SOL {
         transform: rotate(-90deg);
     }
-    
+
     .SAG {
         transform: rotate( 90deg);
     }
-    
+
     .DIK {
         transform: rotate( 180deg);
     }
-    
+
     .NORMAL {
         transform: rotate( 0deg);
     }
@@ -882,8 +883,8 @@ input[type=button]:focus {
 /* TYPE text */
 /* TYPE text */
 input[type=text] {
-    padding:5px; 
-    border:2px solid #ccc; 
+    padding:5px;
+    border:2px solid #ccc;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
@@ -981,7 +982,7 @@ input[type=submit] {
             })
 
             $('.tmpSecilenDosyalar').dropme({
-                replacerSize: true 
+                replacerSize: true
             });
 
             $('.tmpSecilenDosyalar').bind('sortupdate', function(e, elm) {
@@ -1039,7 +1040,7 @@ input[type=submit] {
     function Cevir1(ResimNo, ResimYon) {
         // console.log(ResimNo, ResimYon, DEGER)
         document.getElementById(ResimNo).className = 'NORMAL';
-        
+
         var DURUM = document.getElementById(ResimYon + ResimNo).checked
         document.getElementById(ResimYon + ResimNo).checked =  !DURUM;
 
@@ -1080,7 +1081,7 @@ input[type=submit] {
             processData: false,
             contentType: false,
             success  : function(ajaxCevap)
-            { 
+            {
                alert(ajaxCevap); // Cevabı göster...
             }
         } );
@@ -1103,7 +1104,7 @@ input[type=submit] {
     var YonetAnaPDF      = 0;
 
     jQuery(document).ready(function($) {
-        
+
         $(document).on('change', 'input:file', function() {
             if( this.name == "DosyalarTekli[]"  ) DosyalarTekli    = 1;
             if( this.name == "DosyalarCoklu[]"  ) DosyalarCoklu    = 1;
