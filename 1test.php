@@ -907,6 +907,78 @@
 
     /* =======================================================
     ==========================================================
+    ============== SAYFALARI YÖNET DOSYA YÜKLE ===============
+    ==========================================================
+    ======================================================= */
+
+	/*
+	POST
+	    [FormAdi] => formYonet2
+	    [sayfa_no] => Array
+	*/
+	if( isset($_POST["FormAdi"]) and $_POST["FormAdi"] == "formYonet1" ) {
+    	
+    	// Upload klasöründeki tüm dosyaları temizle...
+    	$KOMUT = "rm -rf upload/*";
+    	$cevap = shell_exec($KOMUT);
+   	
+    	$KOMUT = "cp 0bossayfa.pdf upload/BOSSAYFA.pdf";
+    	$cevap = shell_exec($KOMUT);
+
+
+    	$arrDosya = $_FILES["YonetAnaPDF"];
+//echo "<pre>"; print_r($_FILES);echo "</pre>"; 
+
+    	// Seçilen dosyalar arasında BOŞ veya GEÇERSİZ dosya varsa sil...
+    	$arrDosya = YuklenecekDosyalariTemizle($arrDosya, 'pdf');
+
+    	// Seçilmiş dosyaları UPLOAD klasörüne dosya adı 0001, 0002 olacak biçimde yükle.
+    	$Prefix = "ASIL";
+    	DosyalariYukle($arrDosya, 'pdf', $Prefix);
+    	$Dosya = "ASIL0000";;
+
+
+    	// Şimdi, sayların her birini JPG dosya yapalım...
+    	chdir("upload");
+    	$KOMUT = "pdftoppm {$Dosya} Sayfa -jpeg -jpegopt quality=30 -r 50";
+		$cevap = shell_exec($KOMUT);
+		chdir("..");
+
+		// Ekran çıktısını hazırlayalım
+        chdir("upload");
+        $Resimler = glob("Sayfa*.jpg");
+        chdir("..");
+        $c=1;
+        foreach ($Resimler as $Resim) {
+        	$RANDOM = rand();
+            echo "
+                <li>
+                    <img id='{$c}' src='upload/$Resim?{$RANDOM}'>
+                    <input type='hidden' name='sayfa_no[]' value='{$c}'>
+                    <br>
+                    <input type='checkbox' class='chkBoxGizli' id='SOL{$c}' name='sol[{$c}]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SAG{$c}' name='sag[{$c}]'>
+                    <input type='checkbox' class='chkBoxGizli' id='DIK{$c}' name='dik[{$c}]'>
+                    <input type='checkbox' class='chkBoxGizli' id='SIL{$c}' name='sil[{$c}]'>
+                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'SOL')\"> &#8630; </div>
+                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'SAG')\"> &#8631; </div>
+                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'DIK')\"> &#8645; </div>
+                    <div class='LabelYON' onclick=\"SayfaSil({$c}, 'SIL')\"> &#9851; </div>
+                    <span class='SayfaNo'>Sayfa: {$c}</span>
+                </li>
+				 ";
+            $c++;
+        }
+
+
+    	die(); // Aşağıya devam etmesin...
+
+	}
+
+
+
+    /* =======================================================
+    ==========================================================
     ==================== SAYFALARI YÖNET =====================
     ==========================================================
     ======================================================= */
