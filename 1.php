@@ -153,12 +153,12 @@
                         <input type="text" name="AyarSil1" style="width: 250px;" placeholder="Örnek: 1,7,10,50-60"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Tüm TEK sayfaları sil </td>
+                    <td nowrap="nowrap"> TEK sayfaların hepsini sil </td>
                     <td nowrap="nowrap">
                         <input type="checkbox" name="AyarSil2"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Tüm ÇİFT sayfaları sil </td>
+                    <td nowrap="nowrap"> ÇİFT sayfaların hepsini sil </td>
                     <td nowrap="nowrap">
                         <input type="checkbox" name="AyarSil3"> </td>
                 </tr>
@@ -206,17 +206,18 @@
                         <input type="text" name="AyarBol2" style="width: 250px;" placeholder="Örnek: 4"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Şu sayfalardan bölerek ayrı PDF'ler yap </td>
+                    <td nowrap="nowrap"> Şu sayfalardan başlayıp böl ve ayrı PDF'ler yap (*)</td>
                     <td nowrap="nowrap">
                         <input type="text" name="AyarBol3" style="width: 250px;" placeholder="Örnek: 6,18,27,33"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Özel böl (Her ';' ayrımı ayrı bir PDF olacak) </td>
+                    <td nowrap="nowrap"> Özel böl (Her ';' ayrımı, ayrı bir PDF olacak) </td>
                     <td nowrap="nowrap">
                         <input type="text" name="AyarBol4" style="width: 250px;" placeholder="Örnek: 1,7,10,50-60;18-30,35-40"> </td>
                 </tr>
             </table>
         </fieldset>
+        <p><b>*</b> Yeni dosya, bu sayfadan itibaren başlar</p>
         <input type="button" value="Böl" onclick="FormuPostala('formBol')" id="FormuGonder">
     </form>
 
@@ -461,7 +462,7 @@
                     <td nowrap="nowrap">
                         <input accept='application/pdf' type='file' name='YonetAnaPDF[]'> </td>
                     <td nowrap="nowrap">
-                        <input type="button" value="Başla !" onclick="FormuPostala('formYonet1')" id="FormuGonder"> </td>
+                        <input type="button" value="Başla !" onclick="GelismisYonetimHazirlikFormuPostala('formYonet1')" id="FormuGonder"> </td>
                 </tr>
             </table>
         </fieldset>
@@ -478,7 +479,7 @@
         <fieldset>
             <legend><b style='color: darkred;'>SAYFALARI DÜZENLE</b></legend>
 
-            <ul class="PDFSayfalari">
+            <ul class="PDFSayfalari" id="YONETIM_ALANI">
 <!--
                 <li>
                     <img id='0' src='pul/Sayfa-000.jpg'>
@@ -697,6 +698,10 @@
                 </tr>
             </table>
         </fieldset>
+
+        <p> <b>NOT 1:</b> Boş sayfa ekleme ve Sayfa Silme aynı anda kullanılacak olursa, boş sayfa eklenir ancak sayfa silme yapılmaz.
+        <br><b>NOT 2:</b> Boş sayfa ekleme, ekrandaki  <b>Sayfa:</b> yazan alana bakılarak yapılır</p>
+
         <input type="button" value="Değişiklikleri Kaydet" onclick="FormuPostala('formYonet2')" id="FormuGonder">
     </form>
 
