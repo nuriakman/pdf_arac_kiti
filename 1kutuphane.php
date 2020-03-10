@@ -11,21 +11,13 @@
 	$GENEL_AYARLAR["MAX_IMG_SIZE_in_mb"] = 10 * 1024 * 1024; // Byte cinsinden
 	
 	$GENEL_AYARLAR["UPLOAD_FOLDER"] = "upload/"; // Sonunda '/' var!
-    $GENEL_AYARLAR["BOS_SAYFA"]     = "0bossayfa.pdf"; // Bu dosyanın konumuna göre relatif adres
-    $GENEL_AYARLAR["BOS"]           = "BOS.PDF"; // Boş sayfa için kullanılacak isimdir.
+    //$GENEL_AYARLAR["BOS_SAYFA"]     = "0bossayfa.pdf"; // Bu dosyanın konumuna göre relatif adres
+    //$GENEL_AYARLAR["BOS"]           = "BOS.PDF"; // Boş sayfa için kullanılacak isimdir.
 	
 	// Dosya Tipleri için kaynak: https://stackoverflow.com/questions/7519393/php-mime-types-list-of-mime-types-publically-available
 	$GENEL_AYARLAR["mime_pdf"][] = "application/pdf";
 	$GENEL_AYARLAR["mime_img"][] = 'image/jpeg';
 	$GENEL_AYARLAR["mime_img"][] = 'image/pjpeg';
-	$GENEL_AYARLAR["mime_img"][] = 'image/jpeg';
-	$GENEL_AYARLAR["mime_img"][] = 'image/jpeg';
-	$GENEL_AYARLAR["mime_img"][] = 'image/pjpeg';
-	$GENEL_AYARLAR["mime_img"][] = 'image/jpeg';
-	$GENEL_AYARLAR["mime_img"][] = 'image/pjpeg';
-	$GENEL_AYARLAR["mime_img"][] = 'image/jpeg';
-	$GENEL_AYARLAR["mime_img"][] = 'image/pjpeg';
-	$GENEL_AYARLAR["mime_img"][] = 'image/png';
 	$GENEL_AYARLAR["mime_img"][] = 'image/png';
 	$GENEL_AYARLAR["mime_img"][] = 'application/pdf';
 
@@ -119,7 +111,8 @@
         // PDF'in sayfa sayısını bulalım
         $KOMUT = "pdfinfo $Dosya | grep -a 'Pages' | cut -d\: -f2";
         // echo "$KOMUT\n";
-        $cevap = shell_exec($KOMUT);  // echo "<p><b>KOMUT:</b>$KOMUT</p>";
+        $cevap = shell_exec($KOMUT);  
+        // echo "$cevap<p><b>KOMUT:</b>$KOMUT</p>";
         $SayfaAdedi = trim($cevap) * 1;
         if($SayfaAdedi<=0) return 0;
         return $SayfaAdedi;
