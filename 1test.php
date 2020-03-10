@@ -385,6 +385,7 @@
 				$Bolum = 0;
 				for($i=0; $i<count($arrSayfa); $i++) {
 					$Bit = $arrSayfa[$i] - 1;
+					// if($Bit < $Bas) continue;
 					$KOMUT = sprintf("pdftk {$Dosya} cat {$Bas}-{$Bit} output Sayfalar_{$Bas}-{$Bit}.pdf", $Bolum);
 					$Bas = $Bit + 1;
 				    echo "$KOMUT\n";
@@ -1039,48 +1040,57 @@
 	if( isset($_POST["FormAdi"]) and $_POST["FormAdi"] == "formYonet2" ) {
     	
     	// Upload klasöründeki tüm dosyaları temizle...
-    	$KOMUT = "rm -rf upload/*";
+    	chdir("upload");
+    	$KOMUT = "rm -f !(ASIL0000|BOSSAYFA.pdf)"; // Bu iki dosya hariç temizle...
+    	$cevap = shell_exec($KOMUT);
+    	chdir("..");
+
+    	$KOMUT = "cp 0bossayfa.pdf upload/BOSSAYFA.pdf";
     	$cevap = shell_exec($KOMUT);
 
-    	$KOMUT = "cp 12SAYFA.pdf upload/TEK0000.pdf";
-    	$cevap = shell_exec($KOMUT);
-    	
-    	$KOMUT = "cp 0bossayfa.pdf upload/BOS.pdf";
-    	$cevap = shell_exec($KOMUT);
-
-		$Prefix = "TEK";
+		$Prefix = "ASIL";
 		$Dosya  = sprintf("{$Prefix}%04d", 0);
-		
 		$DesenSil   = $_POST["SilinecekSayfalar"];
 		$DesenBos   = $_POST["EklenecekSayfalar"];
 		$SayfaAdedi = PDFDosyaSayfaSayisi( $Dosya );
-		$arrSil = DesendekiSayfalar($SayfaAdedi, $DesenSil);
-		$arrBos = DesendekiSayfalar($SayfaAdedi, $DesenBos);
+		$arrSil     = DesendekiSayfalar($SayfaAdedi, $DesenSil);
+		$arrBos     = DesendekiSayfalar($SayfaAdedi, $DesenBos);
 
+//print_r($arrBos);
 //print_r( $_POST["sayfa_no"] );
 //print_r( $_POST["sol"] );
 //print_r( $_POST["sag"] );
 //print_r( $_POST["dik"] );
 
+        $Prefix="A";
         $c=0;
         $arrSonuc = array();
+        // Sayfa yönü ve sayfa silme ayarlarının yapılması
         foreach ($_POST["sayfa_no"] as $i => $SayfaNo) {
-        	$c++;
-        	$arrSonuc[$c] = "{$SayfaNo}";
-            if( isset($_POST["sol"][$SayfaNo]) ) $arrSonuc[$c] = "{$SayfaNo}left";
-            if( isset($_POST["sag"][$SayfaNo]) ) $arrSonuc[$c] = "{$SayfaNo}right";
-            if( isset($_POST["dik"][$SayfaNo]) ) $arrSonuc[$c] = "{$SayfaNo}down";
-            if( isset($_POST["sil"][$SayfaNo]) ) unset($arrSonuc[$c]);
+        	$arrSonuc[$SayfaNo] = "{$Prefix}{$SayfaNo} ";
+            if( isset($_POST["sol"][$SayfaNo]) ) $arrSonuc[$SayfaNo] = "{$Prefix}{$SayfaNo}left ";
+            if( isset($_POST["sag"][$SayfaNo]) ) $arrSonuc[$SayfaNo] = "{$Prefix}{$SayfaNo}right ";
+            if( isset($_POST["dik"][$SayfaNo]) ) $arrSonuc[$SayfaNo] = "{$Prefix}{$SayfaNo}down ";
+            if( isset($_POST["sil"][$SayfaNo]) ) unset($arrSonuc[$SayfaNo]);
         }
-/*
+
+        // Kutucuğa girilen SİLME işlemlerinin yapılması
         foreach ($arrSil as $key => $SayfaNo) {
-        	if( inarray($SayfaNo, $arrSonuc) )
+        	if( isset($arrSonuc[$SayfaNo]) ) unset( $arrSonuc[$SayfaNo] );
         }
-*/
-//print_r($arrSonuc);
+
+        // Kutucuğa girilen BOŞ SAYFA EKLEME işlemlerinin yapılması
+        foreach ($arrBos as $key => $SayfaNo) {
+        	if( !isset($arrSonuc[$SayfaNo]) ) $arrSonuc[$SayfaNo] = "";
+        	$arrSonuc[$SayfaNo] .= "W0 ";
+        }
+
+// print_r($arrSonuc);
 
         $Sayfalar = implode(" ", $arrSonuc);
-        $KOMUT = "pdftk 0000.pdf cat $Sayfalar output SONUC.pdf";
+        $BOSSAYFA = "";
+        if( !(strpos($Sayfalar, "W0") === false) ) $BOSSAYFA = "W=BOSSAYFA.pdf";
+        $KOMUT = "pdftk A=ASIL0000 $BOSSAYFA cat $Sayfalar output SONUC.pdf";
 
 	    chdir("upload");
     	$cevap = shell_exec($KOMUT);
