@@ -842,41 +842,49 @@
 
 		$BasAna = 1;
 		$BitAna = 1;
-		$SONUC .= "\n\n";
+		$SONUC  = "";
 
-		for($i=1; $i<=count($arrPDF2s); $i++) {
+		$SNO = 0;
+		foreach ($arrPDF2s as $i => $value) {
 
 			// Ana dosyayı yürütelim...
-			if($i == 1) {
+			if($SNO == 0) {
 				if($arrPDF2s[$i]['Baslamasi'] > 0) {
 					$BasAna = 1;
 					$BitAna = $arrPDF2s[$i]['Baslamasi'];
-					$SONUC .= "{$Alias_ANA}{$BasAna}-{$BitAna} \n";
+					$SONUC .= "{$Alias_ANA}{$BasAna}-{$BitAna} ";
 					$BasAna = $BitAna + 1;
 				}
 			} else {
 				$BitAna = $arrPDF2s[$i]['Baslamasi'];
-				$SONUC .= "{$Alias_ANA}{$BasAna}-{$BitAna} \n";
+				$SONUC .= "{$Alias_ANA}{$BasAna}-{$BitAna} ";
 				$BasAna = $BitAna + 1;
 			}
 
+			$SNO++;
 
 			// Eklenecek dosyayı yürütelim
 			$arrSadelestirilmis = SayfalariSadelestir($arrPDF2s[$i]['Desendekiler']);
 			foreach ($arrSadelestirilmis as $k1 => $v1) {
-				$SONUC .= $arrPDF2s[$i]['ALIAS'] . $v1 . " \n";
+				$SONUC .= $arrPDF2s[$i]['ALIAS'] . $v1 . " ";
 			}
 
 		}
-echo "SONUC: $SONUC \n";
-die();
 		$BitAna = $AnaSayfaSayisi;
-		$SONUC .= "{$Alias_ANA}{$BasAna}-{$BitAna} ";
+		if($BitAna > $AnaSayfaSayisi) {
+			$BitAna = $AnaSayfaSayisi;
+		}
+		if($BasAna <= $AnaSayfaSayisi) {
+			$SONUC .= "{$Alias_ANA}{$BasAna}-{$BitAna} ";
+		}
 
+
+
+//echo "ALIAS: $ALIAS \n\n";
+//echo "SONUC: $SONUC \n \n";
+//print_r($arrPDF2s);
 
     	$KOMUT = "pdftk $ALIAS cat $SONUC output SONUC.PDF";
-die($KOMUT);
-
 
 	    chdir("upload");
     	$cevap = shell_exec($KOMUT);
