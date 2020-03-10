@@ -974,10 +974,22 @@ input[type=submit] {
 <script>
 
     jQuery(document).ready(function($) {
+        //
+        $('.PDFSayfalari').dropme('destroy');
         $('.PDFSayfalari').dropme({
             // items: '.PDFSayfa'
         });
+
+        //
     });
+
+    function SayfalariSurukleBirakIcinHazirla() {
+        $('.PDFSayfalari').dropme('destroy');
+        $('.PDFSayfalari').dropme({
+            // items: '.PDFSayfa'
+        });
+    }
+
 
 
     function YeniDosyaEkle(Kod) {
@@ -1099,6 +1111,46 @@ input[type=submit] {
         }
 
     }
+
+    function GelismisYonetimHazirlikFormuPostala(FormAdi) {
+
+        var HATAVAR = 0
+        HATAVAR = DosyaSecilmemis(FormAdi);
+        if( HATAVAR == 1 ) {
+            alert("Dosya seçimi yapılmamış!")
+            return;
+        }
+        // AJAX ile FİLE UPLOAD
+
+        var form = $('#' + FormAdi)[0]; // Burada standart javascript objesi kullanılması gerekiyor
+        var data = new FormData(form);
+
+        // İlave değişken eklemek istersek
+        // data.append("OZEL1", "Deger1");
+        // data.append("OZEL2", "Deger2");
+
+        // Dosya Ekleme
+        // data.append('image', $('input[type=file]')[0].files[0]);
+
+        $.ajax( {
+            url        : '1test.php',
+            type       : 'POST',
+            enctype    : 'multipart/form-data',
+            data       : data,
+            cache      : false,
+            timeout    : 600000,
+            dataType   : "text",
+            processData: false,
+            contentType: false,
+            success  : function(ajaxCevap)
+            {
+                // alert(ajaxCevap)
+                $("#YONETIM_ALANI").html(ajaxCevap); // Cevabı ekrana yaz
+                SayfalariSurukleBirakIcinHazirla();
+            }
+        } );
+
+    } // GelismisYonetimHazirlikFormuPostala
 
     function FormuPostala(FormAdi) {
 
