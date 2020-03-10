@@ -904,7 +904,133 @@
     	//die();
 	} // formArayaEkle
 
-die("\n\nMutlu son...\n\n");
+
+    /* =======================================================
+    ==========================================================
+    ==================== SAYFALARI YÖNET =====================
+    ==========================================================
+    ======================================================= */
+
+	/*
+	POST
+	    [FormAdi] => formYonet2
+	    [sayfa_no] => Array
+	        (
+	            [0] => 0
+	            [1] => 1
+	            [2] => 2
+	            [3] => 3
+	            [4] => 4
+	            [5] => 5
+	            [6] => 6
+	            [7] => 7
+	            [8] => 8
+	            [9] => 9
+	            [10] => 10
+	            [11] => 11
+	            [12] => 12
+	        )
+
+	    [sil] => Array
+	        (
+	            [0] => on
+	            [1] => on
+	            [4] => on
+	        )
+
+	    [dik] => Array
+	        (
+	            [2] => on
+	            [4] => on
+	        )
+
+	    [sag] => Array
+	        (
+	            [3] => on
+	            [11] => on
+	        )
+
+	    [sol] => Array
+	        (
+	            [5] => on
+	            [7] => on
+	            [9] => on
+	            [10] => on
+	            [12] => on
+	        )
+
+	    [SilinecekSayfalar] => 55-
+	    [EklenecekSayfalar] => 1,2,5,6,7
+
+	*/
+
+	if( isset($_POST["FormAdi"]) and $_POST["FormAdi"] == "formYonet2" ) {
+    	
+    	// Upload klasöründeki tüm dosyaları temizle...
+    	$KOMUT = "rm -rf upload/*";
+    	$cevap = shell_exec($KOMUT);
+
+    	$KOMUT = "cp 12SAYFA.pdf upload/TEK0000.pdf";
+    	$cevap = shell_exec($KOMUT);
+    	
+    	$KOMUT = "cp 0bossayfa.pdf upload/BOS.pdf";
+    	$cevap = shell_exec($KOMUT);
+
+		$Prefix = "TEK";
+		$Dosya  = sprintf("{$Prefix}%04d", 0);
+		
+		$DesenSil   = $_POST["SilinecekSayfalar"];
+		$DesenBos   = $_POST["EklenecekSayfalar"];
+		$SayfaAdedi = PDFDosyaSayfaSayisi( $Dosya );
+		$arrSil = DesendekiSayfalar($SayfaAdedi, $DesenSil);
+		$arrBos = DesendekiSayfalar($SayfaAdedi, $DesenBos);
+
+//print_r( $_POST["sayfa_no"] );
+//print_r( $_POST["sol"] );
+//print_r( $_POST["sag"] );
+//print_r( $_POST["dik"] );
+
+        $c=0;
+        $arrSonuc = array();
+        foreach ($_POST["sayfa_no"] as $i => $SayfaNo) {
+        	$c++;
+        	$arrSonuc[$c] = "{$SayfaNo}";
+            if( isset($_POST["sol"][$SayfaNo]) ) $arrSonuc[$c] = "{$SayfaNo}left";
+            if( isset($_POST["sag"][$SayfaNo]) ) $arrSonuc[$c] = "{$SayfaNo}right";
+            if( isset($_POST["dik"][$SayfaNo]) ) $arrSonuc[$c] = "{$SayfaNo}down";
+            if( isset($_POST["sil"][$SayfaNo]) ) unset($arrSonuc[$c]);
+        }
+/*
+        foreach ($arrSil as $key => $SayfaNo) {
+        	if( inarray($SayfaNo, $arrSonuc) )
+        }
+*/
+//print_r($arrSonuc);
+
+        $Sayfalar = implode(" ", $arrSonuc);
+        $KOMUT = "pdftk 0000.pdf cat $Sayfalar output SONUC.pdf";
+
+	    chdir("upload");
+    	$cevap = shell_exec($KOMUT);
+    	chdir("../");
+
+    	
+    	echo $KOMUT . "\n\n";
+
+    	// print_r($arrPDFs);
+
+
+
+    	echo "***  \n";
+    	echo "================== formYonet2 \n";
+    	echo "================== formYonet2 \n";
+    	echo "================== formYonet2 \n";
+    	//die();
+	} // formYonet2
+
+
+
+
 
     echo "\n\n\n";
     echo "============= GELEN VERİLER \n";
@@ -912,3 +1038,6 @@ die("\n\nMutlu son...\n\n");
     echo "============= GELEN VERİLER \n";
     echo "<h1>POST</h1>";     print_r($_POST);
     echo "<h1>FILES</h1>";    print_r($_FILES);
+
+die("\n\nMutlu son...\n\n");
+
