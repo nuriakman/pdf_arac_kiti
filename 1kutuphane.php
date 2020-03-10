@@ -218,7 +218,7 @@
     function SayidanHarf($SAYI) {
         // SAYI verip, karşılığında HARF alma fonksiyonu
         $HarfSIFIR = "M";
-        $HARFLER   = "ABCDEFGHIJ";
+        $HARFLER   = "KABCDEFGHIJ";
         if($SAYI == 0) return $HarfSIFIR;
 
         $STR = trim("$SAYI");
