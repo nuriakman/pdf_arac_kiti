@@ -26,13 +26,64 @@
 * Burst a PDF Document into Single Pages
 * Uncompress and Re-Compress Page Streams
 * Repair Corrupted PDF (Where Possible)
- 
 
+## Kullanılan Kütüphaneler
+- [ubuntu 18.04](https://ubuntu.com/download/desktop)
+- [pdftk](https://www.pdflabs.com/docs/pdftk-man-page/)
+- [pdftoppm](https://linux.die.net/man/1/pdftoppm)
+- [img2pdf](https://gitlab.mister-muffin.de/josch/img2pdf)
+- [pdfimages](https://www.mankier.com/1/pdfimages)
+- [convert](https://imagemagick.org/script/convert.php)
 
 ## Faydalı Kaynaklar
-- https://www.pdflabs.com/docs/pdftk-man-page/
 - https://net2.com/how-to-install-and-use-pdftk-on-linux-to-merge-or-split-pdf-files/
 - https://askubuntu.com/questions/1028522/how-can-i-install-pdftk-in-ubuntu-18-04-and-later
+
+## pdftk Kurulumu
+
+Ubuntu 18.04 üzerine pdftk kurulumu (64 Bit) [Kaynak: askubuntu.com](https://askubuntu.com/questions/1028522/how-can-i-install-pdftk-in-ubuntu-18-04-and-later)
+
+### `pdftk_installer.sh` Dosyasının içeriği
+```BASH
+#!/bin/bash
+#
+# author: abu
+# date:   July 3 2019 (ver. 1.1)
+# description: bash script to install pdftk on Ubuntu 18.04 for amd64 machines
+##############################################################################
+#
+# change to /tmp directory
+cd /tmp
+# download packages
+wget http://launchpadlibrarian.net/340410966/libgcj17_6.4.0-8ubuntu1_amd64.deb \
+ http://launchpadlibrarian.net/337429932/libgcj-common_6.4-3ubuntu1_all.deb \
+ https://launchpad.net/ubuntu/+source/pdftk/2.02-4build1/+build/10581759/+files/pdftk_2.02-4build1_amd64.deb \
+ https://launchpad.net/ubuntu/+source/pdftk/2.02-4build1/+build/10581759/+files/pdftk-dbg_2.02-4build1_amd64.deb
+
+
+echo -e "Packages for pdftk downloaded\n\n"
+# install packages 
+echo -e "\n\n Installing pdftk: \n\n"
+sudo apt-get install ./libgcj17_6.4.0-8ubuntu1_amd64.deb \
+    ./libgcj-common_6.4-3ubuntu1_all.deb \
+    ./pdftk_2.02-4build1_amd64.deb \
+    ./pdftk-dbg_2.02-4build1_amd64.deb
+echo -e "\n\n pdftk installed\n"
+echo -e "   try it in shell with: > pdftk \n"
+# delete deb files in /tmp directory
+rm ./libgcj17_6.4.0-8ubuntu1_amd64.deb
+rm ./libgcj-common_6.4-3ubuntu1_all.deb
+rm ./pdftk_2.02-4build1_amd64.deb
+rm ./pdftk-dbg_2.02-4build1_amd64.deb
+```
+
+Yukarıdaki kod, `/tmp` dizinine kurulum dosyalarını indirir ve `apt install` komutu ile kurar. Sonrasında `/tmp` dizinine indirdiği dosyaları siler.
+
+Bu script'i çalıştırabilmek için:
+```BASH
+chmod 755 pdftk_installer.sh
+./pdftk_installer.sh
+```
 
 
 ## BİRLEŞTİRME (Dosyaları birbirinin ardına ekleyerek)
@@ -113,6 +164,8 @@ convert -density 150 input.pdf[66] -quality 90 output.png // Sadece 66. Sayfayı
 pdftoppm input.pdf outputname -png
 pdftoppm input.pdf outputname -png -f {66} -singlefile   // Sadece 66. Sayfayı resim yap
 
+
+pdftoppm input.pdf Sayfa -jpeg -jpegopt quality=30 -r 50  // 50 dpi ve %30 Kalitede resimler üretir (Hızlıdır)
 ```
 
 ## JPG dosyaları PDF yapma
