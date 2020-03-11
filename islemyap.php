@@ -1,5 +1,5 @@
 <?php
-	require_once('1kutuphane.php');
+	require_once('kutuphane.php');
 
     /* =======================================================
     ==========================================================
@@ -941,7 +941,7 @@
 
     	// Şimdi, sayların her birini JPG dosya yapalım...
     	chdir("upload");
-    	$KOMUT = "pdftoppm {$Dosya} Sayfa -jpeg -jpegopt quality=30 -r 50";
+    	$KOMUT = "pdftoppm {$Dosya} Sayfa -jpeg -jpegopt quality=30 -r 40";
 		$cevap = shell_exec($KOMUT);
 		chdir("..");
 
@@ -954,18 +954,21 @@
         	$RANDOM = rand();
             echo "
                 <li>
-                    <img id='{$c}' src='upload/$Resim?{$RANDOM}'>
-                    <input type='hidden' name='sayfa_no[]' value='{$c}'>
-                    <br>
-                    <input type='checkbox' class='chkBoxGizli' id='SOL{$c}' name='sol[{$c}]'>
-                    <input type='checkbox' class='chkBoxGizli' id='SAG{$c}' name='sag[{$c}]'>
-                    <input type='checkbox' class='chkBoxGizli' id='DIK{$c}' name='dik[{$c}]'>
-                    <input type='checkbox' class='chkBoxGizli' id='SIL{$c}' name='sil[{$c}]'>
-                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'SOL')\"> &#8630; </div>
-                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'SAG')\"> &#8631; </div>
-                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'DIK')\"> &#8645; </div>
-                    <div class='LabelYON' onclick=\"SayfaSil({$c}, 'SIL')\"> &#9851; </div>
-                    <span class='SayfaNo'>Sayfa: {$c}</span>
+                    <div class='frameImg'>
+                        <a href='upload/$Resim?{$RANDOM}'><img id='$c' src='upload/$Resim?{$RANDOM}'></a>
+                    </div>
+                    <div class='frameButtons'>
+	                    <input type='hidden' name='sayfa_no[]' value='{$c}'>
+	                    <input type='checkbox' class='chkBoxGizli' id='SOL{$c}' name='sol[{$c}]'>
+	                    <input type='checkbox' class='chkBoxGizli' id='SAG{$c}' name='sag[{$c}]'>
+	                    <input type='checkbox' class='chkBoxGizli' id='DIK{$c}' name='dik[{$c}]'>
+	                    <input type='checkbox' class='chkBoxGizli' id='SIL{$c}' name='sil[{$c}]'>
+	                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'SOL')\"> &#8630; </div>
+	                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'SAG')\"> &#8631; </div>
+	                    <div class='LabelYON' onclick=\"Cevir1({$c}, 'DIK')\"> &#8645; </div>
+	                    <div class='LabelYON' onclick=\"SayfaSil({$c}, 'SIL')\"> &#9851; </div>
+	                    <span class='SayfaNo'>Sayfa: {$c}</span>
+	                </div>
                 </li>
 				 ";
             $c++;
