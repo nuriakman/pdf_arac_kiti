@@ -11,8 +11,8 @@
 	$GENEL_AYARLAR["MAX_IMG_SIZE_in_mb"] = 10 * 1024 * 1024; // Byte cinsinden
 	
 	$GENEL_AYARLAR["UPLOAD_FOLDER"] = "upload/"; // Sonunda '/' var!
-    //$GENEL_AYARLAR["BOS_SAYFA"]     = "0bossayfa.pdf"; // Bu dosyanın konumuna göre relatif adres
-    //$GENEL_AYARLAR["BOS"]           = "BOS.PDF"; // Boş sayfa için kullanılacak isimdir.
+    $GENEL_AYARLAR["BOS_SAYFA"]     = "0bossayfa.pdf"; // Bu dosyanın konumuna göre relatif adres
+    $GENEL_AYARLAR["BOS"]           = "BOS.PDF"; // Boş sayfa için kullanılacak isimdir.
 	
 	// Dosya Tipleri için kaynak: https://stackoverflow.com/questions/7519393/php-mime-types-list-of-mime-types-publically-available
 	$GENEL_AYARLAR["mime_pdf"][] = "application/pdf";
