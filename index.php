@@ -19,7 +19,7 @@
     <!-- ======================= BİRLEŞTİR ======================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formBirlestir" name="formBirlestir" method="a" action="s" enctype="multipart/form-data" style="display:none">
+    <form id="formBirlestir" name="formBirlestir" method="a" action="s" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formBirlestir">
 
         <h2>PDF Dosyaları Birleştir</h2>
@@ -155,6 +155,11 @@
                         <input type="text" name="AyarSil1" style="width: 250px;" placeholder="Örnek: 1,7,10,50-60"> </td>
                 </tr>
                 <tr>
+                    <td nowrap="nowrap"> Sadece şu sayfaları bırak, diğerlerini sil </td>
+                    <td nowrap="nowrap">
+                        <input type="text" name="AyarSil4" style="width: 250px;" placeholder="Örnek: 1,7,10,50-60"> </td>
+                </tr>
+                <tr>
                     <td nowrap="nowrap"> TEK sayfaların hepsini sil </td>
                     <td nowrap="nowrap">
                         <input type="checkbox" name="AyarSil2"> </td>
@@ -213,7 +218,7 @@
                         <input type="text" name="AyarBol3" style="width: 250px;" placeholder="Örnek: 6,18,27,33"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Özel böl (Her ';' ayrımı, ayrı bir PDF olacak) </td>
+                    <td nowrap="nowrap"> Şu sayfaları alarak böl (Her ';' ayrımı, ayrı bir PDF olacak) </td>
                     <td nowrap="nowrap">
                         <input type="text" name="AyarBol4" style="width: 250px;" placeholder="Örnek: 1,7,10,50-60;18-30,35-40"> </td>
                 </tr>
@@ -288,7 +293,7 @@
                         <input type="checkbox" name="AyarResim1"> </td>
                 </tr>
                 <tr>
-                    <td nowrap="nowrap"> Resimlerden PDF dosya yap </td>
+                    <td nowrap="nowrap"> Resimlerden bir tane PDF dosya yap </td>
                     <td nowrap="nowrap">
                         <input type="checkbox" name="AyarResim2"> </td>
                 </tr>
@@ -374,6 +379,25 @@
             </table>
         </fieldset>
         <p><b>NOT: </b>Harmanlanacak dosyaların herhangi biri biterse işlem sonlandırılır</p>
+
+
+        <fieldset>
+            <legend><b style='color: darkred;'>Harmanlama Seçenekleri:</b></legend>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td nowrap="nowrap"> Her hamanlama turu ayrı bir PDF olsun </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="AyarHarman1"> </td>
+                </tr>
+                <tr>
+                    <td nowrap="nowrap"> Tümünü tek dosyaya harmanla </td>
+                    <td nowrap="nowrap">
+                        <input type="checkbox" name="AyarHarman2"> </td>
+                </tr>
+            </table>
+        </fieldset>
+
+
         <input type="button" value="Harmanla" onclick="FormuPostala('formHarmanla')" id="FormuGonder">
     </form>
 
