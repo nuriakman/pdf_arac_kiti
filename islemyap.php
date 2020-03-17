@@ -704,6 +704,13 @@
 
 // print_r($arrPDFs);
 
+
+        // Varsayılan harmanlama ayarı şu olsun: Tümünü tek dosyaya harmanla
+        if( !isset($_POST["AyarHarman1"]) ) {
+            $_POST["AyarHarman2"] = "on";
+        }
+
+
     	// ADIM 1: ALIAS'ların hazırlanması
     	$GIRDI  = "pdftk ";
     	foreach ($arrPDFs as $k => $v) {
@@ -714,10 +721,12 @@
     	$HARMAN = "";
 
 		$Sayac = 0;
-		$Hata = 0;
+		$Hata  = 0;
+        $SIRA  = 0;
 		while($Hata == 0) {
 
 			$temp = "";
+            $temp2 = "";
 
 			$Sayac++; if($Sayac > 1000) break; // Emniyet alalım...
 	    	foreach ($arrPDFs as $k => $v) {
@@ -737,8 +746,23 @@
 	    			$temp .= "{$Alias}{$Baslama}-{$Bitis} ";
 	    	//	}
 
-	    		$arrPDFs[$k]['KONUM'] = $Bitis + 1;
+                $temp2 .= "{$Alias}{$Baslama}-{$Bitis} ";
+	    		
+                $arrPDFs[$k]['KONUM'] = $Bitis + 1;
+
 	    	}
+
+            if( isset($_POST["AyarHarman1"]) and $_POST["AyarHarman1"] == "on") {
+                $SIRA++;
+                $KOMUT = sprintf("$GIRDI cat {$temp2} output HARMAN_%02d.PDF", $SIRA);
+                // TODO: Harmanlamada %02d formatı sayfa sayısı dikkate alınarak yapılmalı.
+            
+                chdir("upload");
+                $cevap = shell_exec($KOMUT);
+                chdir("../");
+
+                echo $KOMUT . "\n\n";
+            }
 
 	    	if( $Hata == 0) {
 	    		$HARMAN .= $temp;
@@ -746,13 +770,17 @@
 	    }
 
 	    if($HARMAN <> "") {
-	    	$KOMUT = "$GIRDI cat $HARMAN output SONUC.PDF";
-		    chdir("upload");
-	    	$cevap = shell_exec($KOMUT);
-	    	chdir("../");
 
-	    	
-	    	echo $KOMUT . "\n\n";
+            if( isset($_POST["AyarHarman2"]) and $_POST["AyarHarman2"] == "on") {
+
+    	    	$KOMUT = "$GIRDI cat $HARMAN output SONUC.PDF";
+    		    chdir("upload");
+    	    	$cevap = shell_exec($KOMUT);
+    	    	chdir("../");
+
+    	    	echo $KOMUT . "\n\n";
+
+            }
 
 	    }
 

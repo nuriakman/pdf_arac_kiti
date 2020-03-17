@@ -378,7 +378,7 @@
 
             </table>
         </fieldset>
-        <p><b>NOT: </b>Harmanlanacak dosyaların herhangi biri biterse işlem sonlandırılır</p>
+        <p><b>NOT: </b>Harmanlanacak dosyaların herhangi biri biterse işlem sonlandırılır.<br></p>
 
 
         <fieldset>
@@ -394,6 +394,7 @@
                     <td nowrap="nowrap">
                         <input type="checkbox" name="AyarHarman2"> </td>
                 </tr>
+                
             </table>
         </fieldset>
 
