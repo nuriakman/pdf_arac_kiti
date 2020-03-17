@@ -127,7 +127,7 @@
     		}
     		// Eklenen her dosya sağ sayfadan başlasın
     		if( isset($_POST["AyarBirlestir1"]) and $_POST["AyarBirlestir1"] == "on") {
-	    		if( count($arrPDFs[$k]['Alinacaklar']) % 2 == 1 ) $ALINAN .= "W1 ";
+	    		if( count($arrPDFs[$k]['Desendekiler']) % 2 == 1 ) $ALINAN .= "W1 ";
     		}
     		// Dosyalar arasına 1 boş sayfa ekle
     		if( isset($_POST["AyarBirlestir2"]) and $_POST["AyarBirlestir2"] == "on") {
@@ -175,6 +175,7 @@
 	    [AyarSil1] => 123
 	    [AyarSil2] => on
 	    [AyarSil3] => on
+        [AyarSil4] Text
 	FILES
 		AnaDosyaSil
 
@@ -202,14 +203,16 @@
     	$arrPDFs = array();
     	foreach ($arrDosyalar['name'] as $i => $value) {
     		$SIRANO++;
-    		$Dosya  = sprintf("{$Prefix}%04d", $i);
-    		$Desen = $_POST["AyarSil1"];
+    		$Dosya      = sprintf("{$Prefix}%04d", $i);
+    		$DesenSil   = $_POST["AyarSil1"];
+            $DesenBirak = $_POST["AyarSil4"];
     		$SayfaAdedi = PDFDosyaSayfaSayisi( $Dosya );
     		$arrPDFs[$SIRANO]['ALIAS']       = SayidanHarf($SIRANO); // Bu fonksiyona SIFIR gönderilemez.
     		$arrPDFs[$SIRANO]['DosyaAdi']    = $Dosya;
     		$arrPDFs[$SIRANO]['SayfaAdedi']  = $SayfaAdedi;
     		$arrPDFs[$SIRANO]['Sayfalar']    = SayfalariDoldur($SayfaAdedi);
-    		$arrPDFs[$SIRANO]['Desendekiler']= DesendekiSayfalar($SayfaAdedi, $Desen);
+    		$arrPDFs[$SIRANO]['DesenSil']    = DesendekiSayfalar($SayfaAdedi, $DesenSil);
+            $arrPDFs[$SIRANO]['DesenBirak']  = DesendekiSayfalar($SayfaAdedi, $DesenBirak);
     	}
 
 		$TekleriSil  = 0;
@@ -240,7 +243,8 @@
 	    		if($CiftleriSil == 1) { // Çift Sayfaları Sil
 					if($SayfaNo % 2 == 0) $Sil = 1;
 				}
-				if(in_array($SayfaNo, $arrPDFs[$k]['Desendekiler'])) $Sil = 1;
+				if( in_array($SayfaNo, $arrPDFs[$k]['DesenSil']))   $Sil = 1;
+                if(!in_array($SayfaNo, $arrPDFs[$k]['DesenBirak'])) $Sil = 1;
 
 				if($Sil == 1) unset($arrPDFs[$k]['Sayfalar'][$i]);
 
@@ -638,6 +642,8 @@
 	    [FormAdi] => formHarmanla
 		[Harman_Adet] ARRAY
 		[Harman_Baslama]   ARRAY
+        [AyarHarman1] => on CHECKBOX
+        [AyarHarman2] => on CHECKBOX
 	FILES
 		HarmanPDF
 	*/
