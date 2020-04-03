@@ -9,7 +9,13 @@
 + PDF'den Resim'e ÇOKLU DOSYA SEÇİMİ olabilir
 + PDF'den sayfa sil'de ÇOKLU DOSYA SEÇİMİ olabilir
 - SAYFALARI DÜZENLE ekranında silme için de icon eklenebilir
-
+- OCR Eklenebilir
+  - https://help.ubuntu.com/community/OCR
+  - pdftotext ile PDF'den TEXT üretilebilir  (pdftotext için: sudo apt-get install poppler-utils)
+  - abiword --to=txt SOURCE.pdf ile PDF'den TXT üretilebilir
+  - abiword --to=doc SOURCE.pdf ile PDF'den DOC üretilebilir
+  - https://okular.kde.org/
+  - apt install ocrmypdf
 * Merge PDF Documents
 * Collate PDF Page Scans
 * Split PDF Pages into a New Document
