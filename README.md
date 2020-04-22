@@ -2,13 +2,6 @@
 
 PDF Dosyaların üzerinde işlem yapmayı hedefleyen bir uygulamanın ekran tasarımı çalışması.
 
-## Projede kullanılan ek paketler
-pdftk
-pdftoppm
-pdfimages
-convert
-img2pdf
-
 ## Kullanılan Kütüphaneler
 - [pdftk](https://www.pdflabs.com/docs/pdftk-man-page/)
 - [pdftoppm](https://linux.die.net/man/1/pdftoppm)
