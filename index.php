@@ -19,7 +19,7 @@
     <!-- ======================= BİRLEŞTİR ======================== -->
     <!-- ========================================================== -->
     <!-- ========================================================== -->
-    <form id="formBirlestir" name="formBirlestir" method="a" action="s" enctype="multipart/form-data" style="display:none1">
+    <form id="formBirlestir" name="formBirlestir" method="post" action="" enctype="multipart/form-data" style="display:none1">
         <input type="hidden" name="FormAdi" value="formBirlestir">
 
         <h2>PDF Dosyaları Birleştir</h2>
