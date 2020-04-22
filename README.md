@@ -1,6 +1,55 @@
 # PDF Araç Kiti
 
-PDF Dosyaların üzerinde işlem yapmayı hedefleyen bir uygulamanın ekran tasarımı çalışması.
+PDF Dosyaların üzerinde bir çok işlem yapmayı hedefleyen bir PHP uygulamasıdır.
+
+## İşte Yapabilecekleriniz !
+- Birden fazla PDF dosyayı birleştirme
+  - Tek tek dosya seçebilme
+  - Toplu dosya seçebilme ve sıralamasını değiştirebilme
+  - Eklenen her dosya sağ sayfadan başlasın
+  - Dosyalar arasına 1 boş sayfa ekleme
+  - Dosyalar arasına 2 boş sayfa ekleme
+- PDF Dosya içinden sayfa silme
+  - Çoklu dosya seçimi veya bir adet dosya seçimi
+  - PDF dosya içindeki belirtilen sayfaları silme (tekli sayfa ve aralıklı seçim yapabilme)
+  - Sadece şu sayfaları bırak, diğerlerini sil (tekli sayfa ve aralıklı seçim yapabilme)
+  - TEK sayfaların hepsini sil 
+  - ÇİFT sayfaların hepsini sil
+- PDF Dosyayı Böl
+  - Her sayfayı ayrı PDF yap 
+  - Her x adet sayfayı alıp, ayrı PDF'ler yap
+  - Şu sayfalardan başlayıp böl ve ayrı PDF'ler yap
+  - Şu sayfaları alarak böl (Her ';' ayrımı, ayrı bir PDF olacak) (tekli sayfa ve aralıklı seçim yapabilme)
+- PDF'den Resim'e Döüştürme
+  - Çoklu dosya seçimi veya bir adet dosya seçimi
+  - PDF içindeki tüm resimleri çıkar 
+  - PDF'in her sayfasını JPG dosyası olarak çıkar (ayrıca JPG kalitesi seçebilme)
+- Resim'den PDF'e Dönüştürme
+  - Çoklu dosya seçimi veya bir adet dosya seçimi
+  - Resimlerin her birini PDF dosya yap 
+  - Resimlerden bir tane PDF dosya yap 
+  - A4 Kağıt Yönü belirleme (yatay, dikey)
+- PDF Dosyaları Harmanla
+  - Çoklu dosya seçimi veya bir adet dosya seçimi
+  - Kaç sayfa alınarak harmanlansın seçimi
+  - Harmanlamaya kaçıncı sayfadan başlasın seçimi
+  - Her hamanlama turu ayrı bir PDF olsun
+  - Tümünü tek dosyaya harmanla
+- PDF Dosyanın Arasına PDF Ekle
+  - Ana PDF dosyasını seçme
+  - Ana PDF dosyanızın içine eklenecek PDF Dosyalası seçme
+  - Hangi sayfadan sonra ekleme yapılacağının seçimi
+  - Eklenecek dosyanın hangi sayfalarının alınacağının seçimi (tekli sayfa ve aralıklı seçim yapabilme)
+- Sayfaları Düzenle  
+  - Ana PDF dosyasını seçme
+  - Sayfaların tümünü pul fotoğraf (thumbnail) olarak görme
+  - Pul fotoğrafa tıklatıp sayfayı daha büyük görebilme
+  - Silinecek sayfaları işaretleyebilme
+  - Sayfayı +90 Derece çevirme
+  - Sayfayı -90 Derece çevirme
+  - Sayfayı +180 Derece çevirme
+  - Sürükle bırak yaparak sayfaların sıralamasını değiştirebilme
+
 
 ## Kullanılan Kütüphaneler
 - [pdftk](https://www.pdflabs.com/docs/pdftk-man-page/)
