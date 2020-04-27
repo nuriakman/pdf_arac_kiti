@@ -328,3 +328,4 @@ pdftk original.pdf              \
 - https://www.mankier.com/1/pdftocairo
 - https://github.com/DavidFirth/pdfjam
 - https://poppler.freedesktop.org/
+- http://qpdf.sourceforge.net/  -- MUTLAKA İNCELENMELİ!
