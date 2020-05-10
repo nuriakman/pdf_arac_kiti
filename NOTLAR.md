@@ -207,6 +207,7 @@ resimli.pdf adlı PDF dosya içindeki TÜM RESİMLERİ 5-100 arası dosyalardaki
 - [pdftk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
 - https://github.com/mstamy2/PyPDF2 A utility to read and write PDFs with Python
 - https://github.com/pmaupin/pdfrw  pdfrw is a pure Python library that reads and writes PDFs
+- https://github.com/Hopding/pdf-lib :heart: pdf-lib was created to address the JavaScript ecosystem's lack of robust support for PDF manipulation (especially for PDF modification).
 
 
 # ARAŞTIRMALAR
