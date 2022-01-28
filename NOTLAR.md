@@ -1,3 +1,6 @@
+## Faydalı Keşifler
+https://github.com/qpdf/qpdf QPDF adlı proje de çok faydalı işler yapıyor. Proje çerçevesinde kullanılması düşünülebilir.
+
 ##  TODO
 - Parola korumalı dosyalar için parola alma
 - Dosyaya parola koyma
